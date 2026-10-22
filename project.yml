@@ -1,0 +1,127 @@
+name: NextCall
+
+options:
+  bundleIdPrefix: com.frdzhv
+  deploymentTarget:
+    macOS: "14.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_TREAT_WARNINGS_AS_ERRORS: YES
+    GCC_TREAT_WARNINGS_AS_ERRORS: YES
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    ARCHS: "arm64 x86_64"
+    ONLY_ACTIVE_ARCH: NO
+    ENABLE_HARDENED_RUNTIME: YES
+    CODE_SIGN_IDENTITY: "-"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
+
+packages:
+  KeyboardShortcuts:
+    url: https://github.com/sindresorhus/KeyboardShortcuts
+    from: 2.0.0
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    from: 2.6.0
+
+targets:
+  NextCall:
+    type: application
+    platform: macOS
+    sources:
+      - path: App
+      - path: MenuBar
+      - path: Popover
+      - path: Settings
+      - path: Onboarding
+        optional: true
+      - path: Alerts
+        optional: true
+      - path: Resources
+        optional: true
+    dependencies:
+      - target: NextCallCore
+      # KeyboardShortcuts (Phase 5) and Sparkle (Phase 6) are declared under `packages` and linked when first used.
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: NextCall
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        LSUIElement: true
+        NSCalendarsFullAccessUsageDescription: NextCall reads your calendar events to show upcoming meetings and join links. Your calendar data never leaves this Mac.
+        NSCalendarsUsageDescription: NextCall reads your calendar events to show upcoming meetings and join links. Your calendar data never leaves this Mac.
+    entitlements:
+      path: App/NextCall.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.personal-information.calendars: true
+        com.apple.security.network.client: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.frdzhv.NextCall
+        PRODUCT_NAME: NextCall
+        ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+
+  NextCallCore:
+    type: framework
+    platform: macOS
+    sources:
+      - path: Core
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.frdzhv.NextCall.Core
+        GENERATE_INFOPLIST_FILE: YES
+        DEFINES_MODULE: YES
+        SKIP_INSTALL: YES
+
+  NextCallCoreTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests/NextCallCoreTests
+    dependencies:
+      - target: NextCallCore
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.frdzhv.NextCall.CoreTests
+        GENERATE_INFOPLIST_FILE: YES
+
+  NextCallUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - path: Tests/NextCallUITests
+    dependencies:
+      - target: NextCall
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.frdzhv.NextCall.UITests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: NextCall
+        # The XCTest runner and an ad-hoc signed bundle have different Team IDs, which library validation rejects.
+        ENABLE_HARDENED_RUNTIME: NO
+
+schemes:
+  NextCall:
+    build:
+      targets:
+        NextCall: all
+        NextCallCore: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - NextCallCoreTests
+        - NextCallUITests
+    archive:
+      config: Release

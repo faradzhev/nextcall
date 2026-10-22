@@ -1,0 +1,76 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "About" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Про програму" } }
+      }
+    },
+    "Calendars" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Календарі" } }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Загальні" } }
+      }
+    },
+    "Join Next Meeting" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Приєднатися до наступної зустрічі" } }
+      }
+    },
+    "NextCall" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "NextCall" } }
+      }
+    },
+    "No upcoming meetings" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Немає найближчих зустрічей" } }
+      }
+    },
+    "Notifications" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Сповіщення" } }
+      }
+    },
+    "Providers" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Сервіси" } }
+      }
+    },
+    "Quit NextCall" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Вийти з NextCall" } }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Налаштування" } }
+      }
+    },
+    "Settings…" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Налаштування…" } }
+      }
+    },
+    "Shortcuts" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Скорочення" } }
+      }
+    },
+    "This section is coming soon." : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Цей розділ незабаром з’явиться." } }
+      }
+    },
+    "Version %@" : {
+      "localizations" : {
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Версія %@" } }
+      }
+    }
+  },
+  "version" : "1.0"
+}

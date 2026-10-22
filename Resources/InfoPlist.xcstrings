@@ -1,0 +1,18 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "NSCalendarsFullAccessUsageDescription" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "NextCall reads your calendar events to show upcoming meetings and join links. Your calendar data never leaves this Mac." } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "NextCall читає події вашого календаря, щоб показувати найближчі зустрічі та посилання для приєднання. Дані календаря ніколи не залишають цей Mac." } }
+      }
+    },
+    "NSCalendarsUsageDescription" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "NextCall reads your calendar events to show upcoming meetings and join links. Your calendar data never leaves this Mac." } },
+        "uk" : { "stringUnit" : { "state" : "translated", "value" : "NextCall читає події вашого календаря, щоб показувати найближчі зустрічі та посилання для приєднання. Дані календаря ніколи не залишають цей Mac." } }
+      }
+    }
+  },
+  "version" : "1.0"
+}
