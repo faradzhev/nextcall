@@ -156,3 +156,31 @@ import Testing
         #expect(await collector.items == [.dayChanged, .timeZone])
     }
 }
+
+@Suite struct RefreshPerformanceTests {
+    /// PRD section 8: a refresh of 200 events (mapping, link detection, sorting) stays under 100 ms.
+    /// Measured in a Debug build, which is slower than the shipped Release build.
+    @Test func refreshingTwoHundredEventsIsUnderOneHundredMilliseconds() async {
+        let notes = LinkFixture.all.map { ($0.url.flatMap { URL(string: $0) }, $0.location, $0.notes) }
+        let base = makeDate(2026, 3, 10, 8)
+        let events = (0..<200).map { index -> RawEvent in
+            let sample = notes[index % notes.count]
+            return RawEvent(
+                id: "e\(index)", title: "Event \(index)",
+                start: base.addingTimeInterval(Double(index) * 600), end: base.addingTimeInterval(Double(index) * 600 + 1800),
+                calendar: makeCalendarRef(), url: sample.0, location: sample.1, notes: sample.2, attendeeCount: 3, otherAttendeeCount: 2
+            )
+        }
+        let service = CalendarService(
+            dataSource: FakeDataSource(events: events),
+            changes: { AsyncStream { $0.finish() } },
+            calendar: TestCalendars.utc,
+            now: { base }
+        )
+        let start = ContinuousClock.now
+        let snapshot = await service.snapshot(days: 7, excludingCalendarIDs: [])
+        let elapsed = ContinuousClock.now - start
+        #expect(snapshot.meetings.count == 200)
+        #expect(elapsed < .milliseconds(100), "took \(elapsed)")
+    }
+}

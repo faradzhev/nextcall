@@ -5,6 +5,7 @@ struct MeetingListView: View {
     @Environment(AppState.self) private var appState
     @State private var selectedID: String?
     @FocusState private var isFocused: Bool
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private static let maxHeight: CGFloat = 400
     private static let padding: CGFloat = 12
@@ -52,7 +53,11 @@ struct MeetingListView: View {
             next = delta > 0 ? (meetings.firstIndex { !$0.isPast(at: appState.now) } ?? 0) : meetings.count - 1
         }
         selectedID = meetings[next].id
-        withAnimation { proxy.scrollTo(meetings[next].id, anchor: .center) }
+        if reduceMotion {
+            proxy.scrollTo(meetings[next].id, anchor: .center)
+        } else {
+            withAnimation { proxy.scrollTo(meetings[next].id, anchor: .center) }
+        }
         return .handled
     }
 

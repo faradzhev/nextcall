@@ -37,6 +37,16 @@ final class AlertPresenter {
             if screen == primary { panel.makeKey() }
         }
 
+        // VoiceOver users cannot see the card appear, so say what is starting.
+        NSAccessibility.post(
+            element: NSApp as Any,
+            notification: .announcementRequested,
+            userInfo: [
+                .announcement: String(localized: "Meeting starting: \(StatusText.displayTitle(meeting))"),
+                .priority: NSAccessibilityPriorityLevel.high.rawValue,
+            ]
+        )
+
         dismissTask = Task { [weak self] in
             try? await Task.sleep(for: Self.autoDismiss)
             guard !Task.isCancelled else { return }
@@ -70,6 +80,9 @@ final class AlertPresenter {
             defer: false
         )
         panel.contentView = hosting
+        let label = String(localized: "Meeting starting: \(StatusText.displayTitle(meeting))")
+        panel.title = label
+        panel.setAccessibilityLabel(label)
         panel.level = .screenSaver
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary, .ignoresCycle]
         panel.isFloatingPanel = true

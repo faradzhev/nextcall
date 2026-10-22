@@ -18,13 +18,6 @@ final class AlertAndMenuTests: XCTestCase {
         return app
     }
 
-    @MainActor
-    private func openPopover(_ app: XCUIApplication) {
-        let item = app.statusItems.firstMatch
-        XCTAssertTrue(item.waitForExistence(timeout: 10))
-        item.click()
-        XCTAssertTrue(app.buttons["popover.settings"].waitForExistence(timeout: 5))
-    }
 
     private func openedURL(timeout: TimeInterval = 5) -> String? {
         let deadline = Date().addingTimeInterval(timeout)
@@ -85,7 +78,7 @@ final class AlertAndMenuTests: XCTestCase {
     @MainActor
     func testContextMenuHidesAnEvent() {
         let app = launch()
-        openPopover(app)
+        app.openPopover()
         let row = row(app, titled: "Standup")
         XCTAssertTrue(row.waitForExistence(timeout: 5))
         row.rightClick()
@@ -98,7 +91,7 @@ final class AlertAndMenuTests: XCTestCase {
     @MainActor
     func testContextMenuCopiesTheLink() {
         let app = launch()
-        openPopover(app)
+        app.openPopover()
         let row = row(app, titled: "Standup")
         XCTAssertTrue(row.waitForExistence(timeout: 5))
         NSPasteboard.general.clearContents()
@@ -114,7 +107,7 @@ final class AlertAndMenuTests: XCTestCase {
     @MainActor
     func testEventWithoutALinkHasNoJoinOrCopyItems() {
         let app = launch()
-        openPopover(app)
+        app.openPopover()
         let row = row(app, titled: "Lunch")
         XCTAssertTrue(row.waitForExistence(timeout: 5))
         row.rightClick()
@@ -127,7 +120,7 @@ final class AlertAndMenuTests: XCTestCase {
     @MainActor
     func testSettingsHasAllSixTabs() {
         let app = launch()
-        openPopover(app)
+        app.openPopover()
         app.buttons["popover.settings"].click()
         // Each tab is a toolbar button identified by its SF Symbol name.
         for symbol in ["gearshape", "calendar", "bell", "video", "keyboard", "info.circle"] {

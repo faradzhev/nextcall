@@ -10,6 +10,9 @@ enum UITestSupport {
 
     static var isActive: Bool { ProcessInfo.processInfo.arguments.contains("-uiTestFixtures") }
 
+    /// `-uiTestOnboarding` shows the first-launch flow; fixture runs skip it otherwise.
+    static var showsOnboarding: Bool { ProcessInfo.processInfo.arguments.contains("-uiTestOnboarding") }
+
     @MainActor
     static func makeAppState() -> AppState {
         let suite = "com.frdzhv.NextCall.uitest"
@@ -22,7 +25,8 @@ enum UITestSupport {
             service: service,
             launcher: MeetingLauncher(workspace: PasteboardWorkspace()),
             launchAtLogin: LaunchAtLogin(service: InMemoryLoginService()),
-            notificationCenter: NullNotificationCenter()
+            notificationCenter: NullNotificationCenter(),
+            updater: UpdaterModel(start: false)
         )
     }
 

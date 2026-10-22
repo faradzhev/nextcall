@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 struct SettingsView: View {
@@ -21,19 +22,47 @@ struct SettingsView: View {
 }
 
 private struct AboutTab: View {
+    @Environment(AppState.self) private var appState
+
     private var version: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        let info = Bundle.main
+        let short = info.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        let build = info.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+        return String(localized: "Version \(short) (\(build))")
     }
 
     var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "video.badge.checkmark")
-                .font(.system(size: 40))
+        let updater = appState.updater
+        VStack(spacing: 14) {
+            Image(nsImage: NSApp.applicationIconImage)
+                .resizable()
+                .frame(width: 72, height: 72)
                 .accessibilityHidden(true)
             Text("NextCall")
                 .font(.title2.bold())
-            Text("Version \(version)")
+            Text(version)
                 .foregroundStyle(.secondary)
+
+            Divider().padding(.horizontal, 40)
+
+            if updater.isConfigured {
+                Button("Check for Updates…") { updater.checkForUpdates() }
+                    .disabled(!updater.canCheckForUpdates)
+                Toggle("Check for updates automatically", isOn: Binding(
+                    get: { updater.automaticallyChecks },
+                    set: { updater.setAutomaticallyChecks($0) }
+                ))
+                .toggleStyle(.checkbox)
+            } else {
+                Text("Updates are not set up in this build.")
+                    .foregroundStyle(.secondary)
+            }
+
+            Text("NextCall reads your calendar on this Mac only and has no accounts or analytics. The optional update check is its only network request.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

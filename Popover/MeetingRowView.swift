@@ -3,6 +3,7 @@ import SwiftUI
 
 struct MeetingRowView: View {
     @Environment(AppState.self) private var appState
+    @Environment(\.colorSchemeContrast) private var contrast
     let meeting: Meeting
     let now: Date
     /// A personal block (FR-16) shown dimmed instead of hidden.
@@ -66,7 +67,8 @@ struct MeetingRowView: View {
             RoundedRectangle(cornerRadius: 8)
                 .fill(backgroundColor(ongoing: ongoing))
         }
-        .opacity(meeting.isPast(at: now) || isIgnored ? 0.5 : 1)
+        // Dimmed rows stay readable with Increase Contrast.
+        .opacity(meeting.isPast(at: now) || isIgnored ? (contrast == .increased ? 0.7 : 0.5) : 1)
         .contentShape(Rectangle())
         .contextMenu { contextMenu }
     }
@@ -91,8 +93,9 @@ struct MeetingRowView: View {
     }
 
     private func backgroundColor(ongoing: Bool) -> Color {
-        if isSelected { return Color.accentColor.opacity(0.22) }
-        return ongoing ? Color.accentColor.opacity(0.12) : .clear
+        let strong = contrast == .increased
+        if isSelected { return Color.accentColor.opacity(strong ? 0.45 : 0.22) }
+        return ongoing ? Color.accentColor.opacity(strong ? 0.28 : 0.12) : .clear
     }
 
     private var progress: Double {

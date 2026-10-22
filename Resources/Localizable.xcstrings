@@ -71,6 +71,16 @@
         }
       }
     },
+    "A countdown in the menu bar and a reminder before every meeting.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зворотний відлік у рядку меню та нагадування перед кожною зустріччю."
+          }
+        }
+      }
+    },
     "About": {
       "localizations": {
         "uk": {
@@ -101,6 +111,16 @@
         }
       }
     },
+    "Allow Calendar Access": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволити доступ до календаря"
+          }
+        }
+      }
+    },
     "Allow NextCall in System Settings › Login Items to finish enabling this.": {
       "localizations": {
         "uk": {
@@ -117,6 +137,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дозволити сповіщення"
+          }
+        }
+      }
+    },
+    "Allow access": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Надайте доступ"
+          }
+        }
+      }
+    },
+    "Allowed": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволено"
           }
         }
       }
@@ -171,12 +211,32 @@
         }
       }
     },
+    "Back": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Назад"
+          }
+        }
+      }
+    },
     "Browser": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Браузер"
+          }
+        }
+      }
+    },
+    "Calendar": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календар"
           }
         }
       }
@@ -207,6 +267,56 @@
           "stringUnit": {
             "state": "translated",
             "value": "Календарі"
+          }
+        }
+      }
+    },
+    "Calendars will appear here once access is allowed. You can do that later from the menu bar.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календарі з’являться тут, щойно доступ буде дозволено. Це можна зробити пізніше з рядка меню."
+          }
+        }
+      }
+    },
+    "Check for Updates…": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірити оновлення…"
+          }
+        }
+      }
+    },
+    "Check for updates automatically": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевіряти оновлення автоматично"
+          }
+        }
+      }
+    },
+    "Choose what to show": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оберіть, що показувати"
+          }
+        }
+      }
+    },
+    "Continue": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Продовжити"
           }
         }
       }
@@ -267,6 +377,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Закрити сповіщення"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готово"
           }
         }
       }
@@ -337,6 +457,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Загальні"
+          }
+        }
+      }
+    },
+    "Google and Outlook calendars appear here once you add the account in System Settings › Internet Accounts.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календарі Google та Outlook з’являться тут, щойно ви додасте обліковий запис у Системних налаштуваннях › Інтернет-акаунти."
           }
         }
       }
@@ -461,6 +591,16 @@
         }
       }
     },
+    "Join any video call in one click or one keystroke.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приєднуйтесь до будь-якого відеодзвінка одним кліком або натисканням клавіші."
+          }
+        }
+      }
+    },
     "Join next meeting": {
       "localizations": {
         "uk": {
@@ -487,6 +627,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зустріч починається"
+          }
+        }
+      }
+    },
+    "Meeting starting: %@": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зустріч починається: %@"
           }
         }
       }
@@ -521,12 +671,42 @@
         }
       }
     },
+    "NextCall lives in the menu bar. Click the video icon at the top right to see your meetings.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NextCall живе в рядку меню. Натисніть іконку відео вгорі праворуч, щоб побачити зустрічі."
+          }
+        }
+      }
+    },
     "NextCall needs access to your calendar to show your meetings.": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "NextCall потрібен доступ до календаря, щоб показувати ваші зустрічі."
+          }
+        }
+      }
+    },
+    "NextCall needs to read your calendar. Notifications are optional.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NextCall має читати ваш календар. Сповіщення — за бажанням."
+          }
+        }
+      }
+    },
+    "NextCall reads your calendar on this Mac only and has no accounts or analytics. The optional update check is its only network request.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NextCall читає календар лише на цьому Mac, не має облікових записів і аналітики. Єдиний мережевий запит — необов’язкова перевірка оновлень."
           }
         }
       }
@@ -547,6 +727,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Немає найближчих зустрічей"
+          }
+        }
+      }
+    },
+    "Not asked yet": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ще не запитано"
           }
         }
       }
@@ -711,6 +901,16 @@
         }
       }
     },
+    "Private: it reads your calendar on this Mac and nothing leaves it.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приватність: застосунок читає календар на цьому Mac, і нічого не залишає його межі."
+          }
+        }
+      }
+    },
     "Providers": {
       "localizations": {
         "uk": {
@@ -851,6 +1051,16 @@
         }
       }
     },
+    "Step %lld of %lld": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Крок %lld з %lld"
+          }
+        }
+      }
+    },
     "System default": {
       "localizations": {
         "uk": {
@@ -867,16 +1077,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Працюють у будь-якому застосунку. Натисніть поле й потрібні клавіші; Delete очищає його."
-          }
-        }
-      }
-    },
-    "This section is coming soon.": {
-      "localizations": {
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Цей розділ незабаром з’явиться."
           }
         }
       }
@@ -921,12 +1121,32 @@
         }
       }
     },
+    "Turned off": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнено"
+          }
+        }
+      }
+    },
     "Untitled event": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Подія без назви"
+          }
+        }
+      }
+    },
+    "Updates are not set up in this build.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновлення не налаштовано в цій збірці."
           }
         }
       }
@@ -941,12 +1161,42 @@
         }
       }
     },
-    "Version %@": {
+    "Version %@ (%@)": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Версія %@"
+            "value": "Версія %@ (%@)"
+          }
+        }
+      }
+    },
+    "Welcome": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вітаємо"
+          }
+        }
+      }
+    },
+    "Welcome to NextCall": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вітаємо в NextCall"
+          }
+        }
+      }
+    },
+    "Your next meetings, one click away.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ваші найближчі зустрічі — один клік."
           }
         }
       }

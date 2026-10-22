@@ -9,6 +9,7 @@ import Observation
 final class AppState {
     let settings: SettingsStore
     let launchAtLogin: LaunchAtLogin
+    let updater: UpdaterModel
 
     private(set) var authorization: CalendarAuthorization = .notDetermined
     private(set) var notificationAuthorization: NotificationAuthorization = .notDetermined
@@ -38,12 +39,14 @@ final class AppState {
         service: CalendarService,
         launcher: MeetingLauncher,
         launchAtLogin: LaunchAtLogin,
-        notificationCenter: any NotificationCenterProtocol
+        notificationCenter: any NotificationCenterProtocol,
+        updater: UpdaterModel
     ) {
         self.settings = settings
         self.service = service
         self.launcher = launcher
         self.launchAtLogin = launchAtLogin
+        self.updater = updater
         self.notificationCenter = notificationCenter
         eventFilter = EventFilter(rules: settings.value.filterRules)
     }
@@ -55,7 +58,8 @@ final class AppState {
             service: CalendarService(dataSource: EventKitDataSource(), changes: { monitor.changes() }),
             launcher: MeetingLauncher(),
             launchAtLogin: LaunchAtLogin(),
-            notificationCenter: SystemNotificationCenter()
+            notificationCenter: SystemNotificationCenter(),
+            updater: UpdaterModel()
         )
     }
 
@@ -81,7 +85,7 @@ final class AppState {
 
     // MARK: Lifecycle
 
-    func start() {
+    func start(requestAccessAutomatically: Bool = true) {
         guard updatesTask == nil else { return }
         scheduler = MeetingScheduler { [weak self] snapshot in
             self?.handle(snapshot)
@@ -100,7 +104,7 @@ final class AppState {
                 snoozeTitle: String(localized: "Snooze 1 min")
             )
             await refreshNotificationAuthorization()
-            await requestAccessIfNeeded()
+            if requestAccessAutomatically { await requestAccessIfNeeded() } else { await refresh() }
             for await reason in updates {
                 Log.calendar.debug("Refreshing after change: \(String(describing: reason), privacy: .public)")
                 await refresh()

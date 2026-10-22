@@ -14,6 +14,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItemController: StatusItemController?
     private lazy var settingsWindow = SettingsWindowController(appState: appState)
     private var notificationDelegate: NotificationDelegate?
+    private lazy var onboardingWindow = OnboardingWindowController(appState: appState) { [weak self] in
+        // Done points at the menu bar item by opening it.
+        self?.statusItemController?.showPopover()
+    }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItemController = StatusItemController(appState: appState) { [weak self] in
@@ -21,11 +25,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         registerHotkeys()
         registerNotificationDelegate()
-        appState.start()
+        let onboardingDone = UserDefaults.standard.bool(forKey: OnboardingKey.completed)
+        // Until onboarding is done, the permission prompts belong to its second step.
+        appState.start(requestAccessAutomatically: onboardingDone)
+        if shouldShowOnboarding(done: onboardingDone) { onboardingWindow.show() }
         #if DEBUG
         UITestSupport.runLaunchHooks(appState)
         #endif
         Log.app.info("NextCall launched")
+    }
+
+    private func shouldShowOnboarding(done: Bool) -> Bool {
+        #if DEBUG
+        if UITestSupport.isActive { return UITestSupport.showsOnboarding }
+        #endif
+        return !done
     }
 
     /// Carbon-based global hotkeys: sandbox-safe, and they fire on the main thread.

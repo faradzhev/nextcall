@@ -11,9 +11,7 @@ final class PopoverSmokeTests: XCTestCase {
         // Fixtures keep these tests off the real calendar, whose permission prompt would block the UI.
         app.launchArguments += ["-uiTestFixtures"]
         app.launch()
-        let item = app.statusItems.firstMatch
-        XCTAssertTrue(item.waitForExistence(timeout: 10))
-        item.click()
+        app.openPopover()
         return app
     }
 

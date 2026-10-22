@@ -18,13 +18,6 @@ final class PopoverFixtureTests: XCTestCase {
         return app
     }
 
-    @MainActor
-    private func openPopover(_ app: XCUIApplication) {
-        let item = app.statusItems.firstMatch
-        XCTAssertTrue(item.waitForExistence(timeout: 10))
-        item.click()
-        XCTAssertTrue(app.buttons["popover.settings"].waitForExistence(timeout: 5))
-    }
 
     private func openedURL(timeout: TimeInterval = 5) -> String? {
         let deadline = Date().addingTimeInterval(timeout)
@@ -38,7 +31,7 @@ final class PopoverFixtureTests: XCTestCase {
     @MainActor
     func testHeaderJoinOpensTheImminentMeetingAndClosesThePopover() {
         let app = launch()
-        openPopover(app)
+        app.openPopover()
         let join = app.buttons["popover.join"]
         XCTAssertTrue(join.waitForExistence(timeout: 5))
         XCTAssertTrue(join.label.contains("Design review"), "label was \(join.label)")
@@ -50,7 +43,7 @@ final class PopoverFixtureTests: XCTestCase {
     @MainActor
     func testArrowKeysSelectRowsAndReturnJoinsTheRunningMeeting() {
         let app = launch()
-        openPopover(app)
+        app.openPopover()
         XCTAssertTrue(app.buttons["popover.join"].waitForExistence(timeout: 5))
         // The first Down selects the first meeting that has not ended: the running Standup.
         app.typeKey(.downArrow, modifierFlags: [])
@@ -61,7 +54,7 @@ final class PopoverFixtureTests: XCTestCase {
     @MainActor
     func testReturnWithoutASelectionJoinsTheHeaderTarget() {
         let app = launch()
-        openPopover(app)
+        app.openPopover()
         XCTAssertTrue(app.buttons["popover.join"].waitForExistence(timeout: 5))
         app.typeKey(.return, modifierFlags: [])
         XCTAssertEqual(openedURL(), "https://meet.google.com/abc-defg-hij")

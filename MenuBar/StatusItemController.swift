@@ -97,6 +97,7 @@ final class StatusItemController: NSObject {
 
     func showPopover() {
         guard !popover.isShown, let button = statusItem.button else { return }
+        popover.animates = !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         NSApp.activate()
     }
@@ -105,6 +106,7 @@ final class StatusItemController: NSObject {
         if popover.isShown {
             popover.performClose(nil)
         } else if let button = statusItem.button {
+            popover.animates = !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
             NSApp.activate()
         }

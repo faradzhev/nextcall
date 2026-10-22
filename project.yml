@@ -55,7 +55,7 @@ targets:
     dependencies:
       - target: NextCallCore
       - package: KeyboardShortcuts
-      # Sparkle (Phase 6) is declared under `packages` and linked when first used.
+      - package: Sparkle
     info:
       path: App/Info.plist
       properties:
@@ -64,6 +64,11 @@ targets:
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
         LSUIElement: true
+        # Updates (Sparkle). Both values come from build settings so a development build has none and never
+        # contacts the network; scripts/release.sh passes the real feed URL and public EdDSA key.
+        SUFeedURL: $(SPARKLE_FEED_URL)
+        SUPublicEDKey: $(SPARKLE_PUBLIC_ED_KEY)
+        SUEnableInstallerLauncherService: true
         NSCalendarsFullAccessUsageDescription: NextCall reads your calendar events to show upcoming meetings and join links. Your calendar data never leaves this Mac.
         NSCalendarsUsageDescription: NextCall reads your calendar events to show upcoming meetings and join links. Your calendar data never leaves this Mac.
     entitlements:
@@ -72,11 +77,20 @@ targets:
         com.apple.security.app-sandbox: true
         com.apple.security.personal-information.calendars: true
         com.apple.security.network.client: true
+        # Sparkle's installer XPC services for a sandboxed app (direct distribution only).
+        com.apple.security.temporary-exception.mach-lookup.global-name:
+          - $(PRODUCT_BUNDLE_IDENTIFIER)-spks
+          - $(PRODUCT_BUNDLE_IDENTIFIER)-spki
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.frdzhv.NextCall
         PRODUCT_NAME: NextCall
         ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        # Sparkle is compiled in for direct distribution only; a Mac App Store build drops this flag.
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) DIRECT_DISTRIBUTION"
+        SPARKLE_FEED_URL: ""
+        SPARKLE_PUBLIC_ED_KEY: ""
 
   NextCallCore:
     type: framework

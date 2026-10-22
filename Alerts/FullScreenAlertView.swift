@@ -1,8 +1,10 @@
 import NextCallCore
+import AppKit
 import SwiftUI
 
 /// The card shown by the full-screen alert: what is starting, and Join / Dismiss.
 struct FullScreenAlertView: View {
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     let meeting: Meeting
     let onJoin: () -> Void
     let onDismiss: () -> Void
@@ -47,10 +49,15 @@ struct FullScreenAlertView: View {
         }
         .padding(32)
         .frame(width: 480)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 22))
+        .background(background, in: RoundedRectangle(cornerRadius: 22))
         .overlay(RoundedRectangle(cornerRadius: 22).strokeBorder(.separator))
         .padding(24)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("alert.card")
+    }
+
+    /// Solid instead of blurred when the user turned on Reduce Transparency.
+    private var background: AnyShapeStyle {
+        reduceTransparency ? AnyShapeStyle(Color(nsColor: .windowBackgroundColor)) : AnyShapeStyle(.regularMaterial)
     }
 }
