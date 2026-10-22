@@ -61,21 +61,27 @@ private struct ProviderRow: View {
     @Binding var mode: OpenMode
 
     var body: some View {
-        HStack {
+        HStack(alignment: .center, spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(provider.displayName)
                 Text(statusText)
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            Spacer()
-            Picker(provider.displayName, selection: $mode) {
+            Spacer(minLength: 8)
+            // A menu keeps the row narrow in every language; a provider without an app always shows "Browser".
+            Picker(provider.displayName, selection: Binding(
+                get: { hasNativeApp ? mode : .browser },
+                set: { mode = $0 }
+            )) {
                 Text("App").tag(OpenMode.app)
                 Text("Browser").tag(OpenMode.browser)
             }
             .labelsHidden()
-            .pickerStyle(.segmented)
-            .frame(width: 150)
+            .pickerStyle(.menu)
+            .fixedSize()
             .disabled(!hasNativeApp)
             .accessibilityLabel(Text("Open \(provider.displayName) in"))
         }
