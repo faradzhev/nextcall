@@ -64,6 +64,7 @@ targets:
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
         LSUIElement: true
+        LSApplicationCategoryType: public.app-category.productivity
         # Updates (Sparkle). Both values come from build settings so a development build has none and never
         # contacts the network; scripts/release.sh passes the real feed URL and public EdDSA key.
         SUFeedURL: $(SPARKLE_FEED_URL)
