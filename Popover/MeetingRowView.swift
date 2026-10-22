@@ -5,6 +5,9 @@ struct MeetingRowView: View {
     let meeting: Meeting
     let now: Date
 
+    /// Fixed so the popover can size its list without measuring.
+    static let height: CGFloat = 36
+
     var body: some View {
         HStack(spacing: 10) {
             RoundedRectangle(cornerRadius: 2)
@@ -31,7 +34,7 @@ struct MeetingRowView: View {
                 .foregroundStyle(.secondary)
             }
         }
-        .frame(minHeight: 36)
+        .frame(height: Self.height)
         .opacity(meeting.isPast(at: now) ? 0.5 : 1)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)

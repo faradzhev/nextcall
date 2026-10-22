@@ -17,6 +17,7 @@ struct PopoverView: View {
                     Image(systemName: "gearshape")
                 }
                 .accessibilityLabel(Text("Settings"))
+                .accessibilityIdentifier("popover.settings")
                 .keyboardShortcut(",", modifiers: .command)
 
                 Spacer()
@@ -25,6 +26,7 @@ struct PopoverView: View {
                     Image(systemName: "power")
                 }
                 .accessibilityLabel(Text("Quit NextCall"))
+                .accessibilityIdentifier("popover.quit")
                 .keyboardShortcut("q", modifiers: .command)
             }
             .buttonStyle(.borderless)
