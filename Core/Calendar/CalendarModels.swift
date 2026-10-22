@@ -74,6 +74,8 @@ public struct RawEvent: Sendable, Equatable {
     public let notes: String?
     public let attendeeCount: Int
     public let otherAttendeeCount: Int
+    /// Email addresses of the other attendees, for "Email attendees".
+    public let attendeeEmails: [String]
     public let myStatus: ParticipantStatus
     public let availability: EventAvailability
 
@@ -90,6 +92,7 @@ public struct RawEvent: Sendable, Equatable {
         notes: String? = nil,
         attendeeCount: Int = 0,
         otherAttendeeCount: Int = 0,
+        attendeeEmails: [String] = [],
         myStatus: ParticipantStatus = .unknown,
         availability: EventAvailability = .busy
     ) {
@@ -105,6 +108,7 @@ public struct RawEvent: Sendable, Equatable {
         self.notes = notes
         self.attendeeCount = attendeeCount
         self.otherAttendeeCount = otherAttendeeCount
+        self.attendeeEmails = attendeeEmails
         self.myStatus = myStatus
         self.availability = availability
     }

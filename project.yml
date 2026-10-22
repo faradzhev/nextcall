@@ -15,13 +15,19 @@ settings:
     GCC_TREAT_WARNINGS_AS_ERRORS: YES
     MACOSX_DEPLOYMENT_TARGET: "14.0"
     ARCHS: "arm64 x86_64"
-    ONLY_ACTIVE_ARCH: NO
     ENABLE_HARDENED_RUNTIME: YES
     CODE_SIGN_IDENTITY: "-"
     MARKETING_VERSION: "0.1.0"
     CURRENT_PROJECT_VERSION: "1"
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
     SWIFT_EMIT_LOC_STRINGS: YES
+
+  configs:
+    # Swift packages only build the active architecture in Debug, so Debug must do the same; Release is universal.
+    Debug:
+      ONLY_ACTIVE_ARCH: YES
+    Release:
+      ONLY_ACTIVE_ARCH: NO
 
 packages:
   KeyboardShortcuts:
@@ -48,7 +54,8 @@ targets:
         optional: true
     dependencies:
       - target: NextCallCore
-      # KeyboardShortcuts (Phase 5) and Sparkle (Phase 6) are declared under `packages` and linked when first used.
+      - package: KeyboardShortcuts
+      # Sparkle (Phase 6) is declared under `packages` and linked when first used.
     info:
       path: App/Info.plist
       properties:

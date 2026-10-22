@@ -88,6 +88,14 @@ struct GeneralTab: View {
                 Button("Reset keywords") {
                     settings.update { $0.ignoreKeywords = EventFilterRules.defaultIgnoreKeywords }
                 }
+
+                if !settings.value.hiddenMeetings.isEmpty {
+                    HStack {
+                        Text("Hidden events: \(settings.value.hiddenMeetings.count)")
+                        Spacer()
+                        Button("Show all") { appState.unhideAll() }
+                    }
+                }
             } header: {
                 Text("Ignored events")
             } footer: {

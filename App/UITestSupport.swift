@@ -21,9 +21,32 @@ enum UITestSupport {
             settings: settings,
             service: service,
             launcher: MeetingLauncher(workspace: PasteboardWorkspace()),
-            launchAtLogin: LaunchAtLogin(service: InMemoryLoginService())
+            launchAtLogin: LaunchAtLogin(service: InMemoryLoginService()),
+            notificationCenter: NullNotificationCenter()
         )
     }
+
+    /// `-uiTestShowAlert` presents the full-screen alert for the fixture's "Design review" once the list has loaded.
+    @MainActor
+    static func runLaunchHooks(_ state: AppState) {
+        guard isActive, ProcessInfo.processInfo.arguments.contains("-uiTestShowAlert") else { return }
+        Task { @MainActor in
+            for _ in 0..<100 where state.meetings.isEmpty { try? await Task.sleep(for: .milliseconds(50)) }
+            if let meeting = state.meetings.first(where: { $0.title == "Design review" }) {
+                state.showFullScreenAlert(for: meeting)
+            }
+        }
+    }
+}
+
+/// Keeps UI tests from scheduling real notifications or showing the system permission prompt.
+private struct NullNotificationCenter: NotificationCenterProtocol {
+    func authorizationStatus() async -> NotificationAuthorization { .authorized }
+    func requestAuthorization() async -> Bool { true }
+    func registerCategories(joinTitle: String, snoozeTitle: String) async {}
+    func add(_ request: AlertRequest) async {}
+    func pendingIdentifiers(prefix: String) async -> [String] { [] }
+    func removePending(identifiers: [String]) async {}
 }
 
 /// "Opens" a URL by writing it to a named pasteboard the UI test can read.

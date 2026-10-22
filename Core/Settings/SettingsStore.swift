@@ -47,5 +47,7 @@ public final class SettingsStore {
         settings.daysAhead = min(max(settings.daysAhead, 1), CalendarService.maxDays)
         let range = AppSettings.titleLengthRange
         settings.menuBarTitleLength = min(max(settings.menuBarTitleLength, range.lowerBound), range.upperBound)
+        let lead = AppSettings.leadMinutesRange
+        settings.notificationLeadMinutes = min(max(settings.notificationLeadMinutes, lead.lowerBound), lead.upperBound)
     }
 }

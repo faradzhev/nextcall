@@ -58,6 +58,7 @@ public struct Meeting: Identifiable, Hashable, Sendable {
     public let link: MeetingLink?
     public let attendeeCount: Int
     public let otherAttendeeCount: Int
+    public let attendeeEmails: [String]
     public let myStatus: ParticipantStatus
     public let availability: EventAvailability
 
@@ -71,8 +72,15 @@ public struct Meeting: Identifiable, Hashable, Sendable {
         self.link = link
         attendeeCount = raw.attendeeCount
         otherAttendeeCount = raw.otherAttendeeCount
+        attendeeEmails = raw.attendeeEmails
         myStatus = raw.myStatus
         availability = raw.availability
+    }
+
+    /// The EventKit identifier without the occurrence suffix (see `id`).
+    public var eventIdentifier: String {
+        guard let separator = id.lastIndex(of: "|") else { return id }
+        return String(id[..<separator])
     }
 
     public func isPast(at now: Date) -> Bool { end <= now }

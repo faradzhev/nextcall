@@ -89,9 +89,18 @@ public final class EventKitDataSource: CalendarDataSource, @unchecked Sendable {
             notes: event.notes,
             attendeeCount: attendees.count,
             otherAttendeeCount: attendees.filter { !$0.isCurrentUser }.count,
+            attendeeEmails: attendees.filter { !$0.isCurrentUser }.compactMap(email),
             myStatus: me.map { map($0.participantStatus) } ?? .unknown,
             availability: map(event.availability)
         )
+    }
+
+    /// Participants carry their address as a `mailto:` URL.
+    static func email(_ participant: EKParticipant) -> String? {
+        let string = participant.url.absoluteString
+        guard string.lowercased().hasPrefix("mailto:") else { return nil }
+        let address = String(string.dropFirst("mailto:".count)).removingPercentEncoding ?? ""
+        return address.contains("@") ? address : nil
     }
 
     static func map(_ status: EKParticipantStatus) -> ParticipantStatus {

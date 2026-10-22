@@ -18,6 +18,14 @@ public struct AppSettings: Codable, Equatable, Sendable {
     public var providerOpenModes: [String: OpenMode]
     /// Bundle ID of the preferred browser; nil is the system default.
     public var browserBundleID: String?
+    public var notificationsEnabled: Bool
+    public var notificationLeadMinutes: Int
+    public var notificationSound: Bool
+    /// Applies to notifications and the full-screen alert.
+    public var alertsOnlyWithLinks: Bool
+    public var fullScreenAlertEnabled: Bool
+    /// Meetings hidden from the context menu: meeting ID to its end time (reference-date seconds), so old entries can be pruned.
+    public var hiddenMeetings: [String: Double]
 
     public init(
         daysAhead: Int = 2,
@@ -32,7 +40,13 @@ public struct AppSettings: Codable, Equatable, Sendable {
         menuBarMode: MenuBarMode = .countdown,
         menuBarTitleLength: Int = 20,
         providerOpenModes: [String: OpenMode] = [:],
-        browserBundleID: String? = nil
+        browserBundleID: String? = nil,
+        notificationsEnabled: Bool = true,
+        notificationLeadMinutes: Int = 1,
+        notificationSound: Bool = true,
+        alertsOnlyWithLinks: Bool = false,
+        fullScreenAlertEnabled: Bool = false,
+        hiddenMeetings: [String: Double] = [:]
     ) {
         self.daysAhead = daysAhead
         self.showAllDay = showAllDay
@@ -47,6 +61,12 @@ public struct AppSettings: Codable, Equatable, Sendable {
         self.menuBarTitleLength = menuBarTitleLength
         self.providerOpenModes = providerOpenModes
         self.browserBundleID = browserBundleID
+        self.notificationsEnabled = notificationsEnabled
+        self.notificationLeadMinutes = notificationLeadMinutes
+        self.notificationSound = notificationSound
+        self.alertsOnlyWithLinks = alertsOnlyWithLinks
+        self.fullScreenAlertEnabled = fullScreenAlertEnabled
+        self.hiddenMeetings = hiddenMeetings
     }
 
     public init(from decoder: Decoder) throws {
@@ -65,6 +85,12 @@ public struct AppSettings: Codable, Equatable, Sendable {
         menuBarTitleLength = try c.decodeIfPresent(Int.self, forKey: .menuBarTitleLength) ?? defaults.menuBarTitleLength
         providerOpenModes = try c.decodeIfPresent([String: OpenMode].self, forKey: .providerOpenModes) ?? defaults.providerOpenModes
         browserBundleID = try c.decodeIfPresent(String.self, forKey: .browserBundleID)
+        notificationsEnabled = try c.decodeIfPresent(Bool.self, forKey: .notificationsEnabled) ?? defaults.notificationsEnabled
+        notificationLeadMinutes = try c.decodeIfPresent(Int.self, forKey: .notificationLeadMinutes) ?? defaults.notificationLeadMinutes
+        notificationSound = try c.decodeIfPresent(Bool.self, forKey: .notificationSound) ?? defaults.notificationSound
+        alertsOnlyWithLinks = try c.decodeIfPresent(Bool.self, forKey: .alertsOnlyWithLinks) ?? defaults.alertsOnlyWithLinks
+        fullScreenAlertEnabled = try c.decodeIfPresent(Bool.self, forKey: .fullScreenAlertEnabled) ?? defaults.fullScreenAlertEnabled
+        hiddenMeetings = try c.decodeIfPresent([String: Double].self, forKey: .hiddenMeetings) ?? defaults.hiddenMeetings
     }
 
     public var listOptions: MeetingListOptions {
@@ -72,6 +98,16 @@ public struct AppSettings: Codable, Equatable, Sendable {
     }
 
     public static let titleLengthRange = 5...40
+    public static let leadMinutesRange = 0...30
+
+    public var alertRules: AlertRules {
+        AlertRules(
+            enabled: notificationsEnabled,
+            leadMinutes: notificationLeadMinutes,
+            sound: notificationSound,
+            onlyWithLinks: alertsOnlyWithLinks
+        )
+    }
 
     public var launchPreferences: LaunchPreferences {
         var modes: [Provider: OpenMode] = [:]

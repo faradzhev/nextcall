@@ -13,4 +13,8 @@ public enum SystemSettingsLink {
     public static let calendarPrivacy = URL(
         string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Calendars"
     )!
+
+    public static let notifications = URL(
+        string: "x-apple.systempreferences:com.apple.Notifications-Settings.extension"
+    )!
 }

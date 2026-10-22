@@ -7,24 +7,16 @@ struct SettingsView: View {
                 .tabItem { Label("General", systemImage: "gearshape") }
             CalendarsTab()
                 .tabItem { Label("Calendars", systemImage: "calendar") }
-            PlaceholderTab()
+            NotificationsTab()
                 .tabItem { Label("Notifications", systemImage: "bell") }
-            PlaceholderTab()
+            ProvidersTab()
                 .tabItem { Label("Providers", systemImage: "video") }
-            PlaceholderTab()
+            ShortcutsTab()
                 .tabItem { Label("Shortcuts", systemImage: "keyboard") }
             AboutTab()
                 .tabItem { Label("About", systemImage: "info.circle") }
         }
         .frame(width: 520, height: 560)
-    }
-}
-
-private struct PlaceholderTab: View {
-    var body: some View {
-        Text("This section is coming soon.")
-            .foregroundStyle(.secondary)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

@@ -20,24 +20,28 @@ struct MeetingRowView: View {
                 .frame(width: 4)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text(StatusText.displayTitle(meeting))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(StatusText.displayTitle(meeting))
+                        .lineLimit(1)
+                    HStack(spacing: 4) {
+                        Text(timeText)
+                        if let link = meeting.link {
+                            Image(systemName: "video.fill")
+                                .accessibilityHidden(true)
+                            Text(link.provider.displayName)
+                        }
+                        if meeting.attendeeCount > 1 {
+                            Image(systemName: "person.2")
+                                .accessibilityHidden(true)
+                            Text(verbatim: "\(meeting.attendeeCount)")
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                     .lineLimit(1)
-                HStack(spacing: 4) {
-                    Text(timeText)
-                    if let link = meeting.link {
-                        Image(systemName: "video.fill")
-                            .accessibilityHidden(true)
-                        Text(link.provider.displayName)
-                    }
-                    if meeting.attendeeCount > 1 {
-                        Image(systemName: "person.2")
-                            .accessibilityHidden(true)
-                        Text(verbatim: "\(meeting.attendeeCount)")
-                    }
                 }
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(accessibilityText)
 
                 if ongoing {
                     ProgressView(value: progress)
@@ -46,8 +50,6 @@ struct MeetingRowView: View {
                         .accessibilityLabel(Text("Elapsed time"))
                 }
             }
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel(accessibilityText)
 
             Spacer(minLength: 8)
 
@@ -65,6 +67,27 @@ struct MeetingRowView: View {
                 .fill(backgroundColor(ongoing: ongoing))
         }
         .opacity(meeting.isPast(at: now) || isIgnored ? 0.5 : 1)
+        .contentShape(Rectangle())
+        .contextMenu { contextMenu }
+    }
+
+    @ViewBuilder
+    private var contextMenu: some View {
+        if meeting.link != nil {
+            Button("Join") { appState.join(meeting) }
+            Button("Copy link") { appState.copyLink(meeting) }
+        }
+        Button("Open in Calendar") { appState.openInCalendar(meeting) }
+        if !meeting.attendeeEmails.isEmpty {
+            Button("Email attendees") { appState.emailAttendees(meeting) }
+        }
+        Divider()
+        Button("Hide this event") { appState.hide(meeting) }
+        if appState.canIgnoreTitle(meeting) {
+            Button("Ignore events titled “\(meeting.title.trimmingCharacters(in: .whitespacesAndNewlines))”") {
+                appState.ignoreEvents(titled: meeting)
+            }
+        }
     }
 
     private func backgroundColor(ongoing: Bool) -> Color {

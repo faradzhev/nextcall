@@ -95,6 +95,12 @@ final class StatusItemController: NSObject {
         }
     }
 
+    func showPopover() {
+        guard !popover.isShown, let button = statusItem.button else { return }
+        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        NSApp.activate()
+    }
+
     private func togglePopover() {
         if popover.isShown {
             popover.performClose(nil)

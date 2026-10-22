@@ -31,6 +31,16 @@
         }
       }
     },
+    "%lld min before": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За %lld хв"
+          }
+        }
+      }
+    },
     "%lldh": {
       "localizations": {
         "uk": {
@@ -101,6 +111,76 @@
         }
       }
     },
+    "Allow Notifications": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволити сповіщення"
+          }
+        }
+      }
+    },
+    "Always opens in the browser": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завжди відкривається в браузері"
+          }
+        }
+      }
+    },
+    "App": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Застосунок"
+          }
+        }
+      }
+    },
+    "App installed": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Застосунок встановлено"
+          }
+        }
+      }
+    },
+    "App not installed, uses the browser": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Застосунок не встановлено, використовується браузер"
+          }
+        }
+      }
+    },
+    "At the start": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На початку"
+          }
+        }
+      }
+    },
+    "Browser": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Браузер"
+          }
+        }
+      }
+    },
     "Calendar access is restricted on this Mac, for example by a profile or Screen Time.": {
       "localizations": {
         "uk": {
@@ -127,6 +207,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Календарі"
+          }
+        }
+      }
+    },
+    "Copy link": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Копіювати посилання"
           }
         }
       }
@@ -161,12 +251,42 @@
         }
       }
     },
+    "Dismiss": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Закрити"
+          }
+        }
+      }
+    },
+    "Dismiss alert": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Закрити сповіщення"
+          }
+        }
+      }
+    },
     "Elapsed time": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Минулий час"
+          }
+        }
+      }
+    },
+    "Email attendees": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Написати учасникам"
           }
         }
       }
@@ -201,6 +321,16 @@
         }
       }
     },
+    "Full-screen alert when a meeting starts": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повноекранне сповіщення на початку зустрічі"
+          }
+        }
+      }
+    },
     "General": {
       "localizations": {
         "uk": {
@@ -231,12 +361,32 @@
         }
       }
     },
+    "Hidden events: %lld": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приховані події: %lld"
+          }
+        }
+      }
+    },
     "Hide declined events": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Ховати відхилені події"
+          }
+        }
+      }
+    },
+    "Hide this event": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сховати цю подію"
           }
         }
       }
@@ -251,12 +401,32 @@
         }
       }
     },
+    "Ignore events titled “%@”": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ігнорувати події «%@»"
+          }
+        }
+      }
+    },
     "Ignored events": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Ігноровані події"
+          }
+        }
+      }
+    },
+    "Ignored events, declined events and all-day events never trigger a reminder or an alert.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ігноровані, відхилені та цілоденні події ніколи не викликають нагадування чи сповіщення."
           }
         }
       }
@@ -291,12 +461,32 @@
         }
       }
     },
+    "Join next meeting": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приєднатися до наступної зустрічі"
+          }
+        }
+      }
+    },
     "Launch at login": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Запускати під час входу"
+          }
+        }
+      }
+    },
+    "Meeting starting": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зустріч починається"
           }
         }
       }
@@ -381,12 +571,62 @@
         }
       }
     },
+    "Notifications for NextCall are turned off in System Settings.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщення NextCall вимкнено в Системних налаштуваннях."
+          }
+        }
+      }
+    },
+    "Notify": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщати"
+          }
+        }
+      }
+    },
+    "Notify before meetings": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщати перед зустрічами"
+          }
+        }
+      }
+    },
     "Now: %@": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Зараз: %@"
+          }
+        }
+      }
+    },
+    "Only for events with a meeting link": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише для подій із посиланням на зустріч"
+          }
+        }
+      }
+    },
+    "Open %@ in": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкривати %@ у"
           }
         }
       }
@@ -411,6 +651,36 @@
         }
       }
     },
+    "Open in Calendar": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити в Календарі"
+          }
+        }
+      }
+    },
+    "Open popover": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити спливне вікно"
+          }
+        }
+      }
+    },
+    "Open web links in": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкривати веб-посилання в"
+          }
+        }
+      }
+    },
     "Other": {
       "localizations": {
         "uk": {
@@ -427,6 +697,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Минулі події"
+          }
+        }
+      }
+    },
+    "Play sound": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відтворювати звук"
           }
         }
       }
@@ -501,6 +781,16 @@
         }
       }
     },
+    "Show all": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати всі"
+          }
+        }
+      }
+    },
     "Show all-day events": {
       "localizations": {
         "uk": {
@@ -527,6 +817,56 @@
           "stringUnit": {
             "state": "translated",
             "value": "Показувати в рядку меню"
+          }
+        }
+      }
+    },
+    "Snooze 1 min": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкласти на 1 хв"
+          }
+        }
+      }
+    },
+    "Starting now": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Починається зараз"
+          }
+        }
+      }
+    },
+    "Starts in %@": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Починається через %@"
+          }
+        }
+      }
+    },
+    "System default": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Системний за замовчуванням"
+          }
+        }
+      }
+    },
+    "These work from any app. Click a field and press the keys you want; press Delete to clear it.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Працюють у будь-якому застосунку. Натисніть поле й потрібні клавіші; Delete очищає його."
           }
         }
       }
@@ -587,6 +927,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Подія без назви"
+          }
+        }
+      }
+    },
+    "Used when a provider is set to open in the browser, or its app is not installed.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Використовується, коли сервіс налаштовано на браузер або його застосунок не встановлено."
           }
         }
       }
