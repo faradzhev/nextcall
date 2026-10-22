@@ -3,9 +3,9 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         TabView {
-            PlaceholderTab()
+            GeneralTab()
                 .tabItem { Label("General", systemImage: "gearshape") }
-            PlaceholderTab()
+            CalendarsTab()
                 .tabItem { Label("Calendars", systemImage: "calendar") }
             PlaceholderTab()
                 .tabItem { Label("Notifications", systemImage: "bell") }
@@ -16,7 +16,7 @@ struct SettingsView: View {
             AboutTab()
                 .tabItem { Label("About", systemImage: "info.circle") }
         }
-        .frame(width: 520, height: 360)
+        .frame(width: 520, height: 420)
     }
 }
 

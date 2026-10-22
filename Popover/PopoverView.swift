@@ -1,3 +1,4 @@
+import NextCallCore
 import SwiftUI
 
 struct PopoverView: View {
@@ -7,9 +8,7 @@ struct PopoverView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Text("No upcoming meetings")
-                .foregroundStyle(.secondary)
-                .frame(maxWidth: .infinity, minHeight: 120)
+            content
 
             Divider()
 
@@ -32,5 +31,15 @@ struct PopoverView: View {
             .padding(10)
         }
         .frame(width: 360)
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        switch appState.authorization {
+        case .granted:
+            MeetingListView()
+        case .notDetermined, .denied, .restricted:
+            CalendarAccessView()
+        }
     }
 }

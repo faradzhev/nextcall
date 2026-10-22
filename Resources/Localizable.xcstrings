@@ -1,76 +1,368 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "About" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Про програму" } }
+  "sourceLanguage": "en",
+  "strings": {
+    "About": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Про програму"
+          }
+        }
       }
     },
-    "Calendars" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Календарі" } }
+    "All day": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увесь день"
+          }
+        }
       }
     },
-    "General" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Загальні" } }
+    "Calendar access is restricted on this Mac, for example by a profile or Screen Time.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ до календаря обмежено на цьому Mac, наприклад профілем або Екранним часом."
+          }
+        }
       }
     },
-    "Join Next Meeting" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Приєднатися до наступної зустрічі" } }
+    "Calendar access is turned off. Allow NextCall in System Settings to see your meetings.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ до календаря вимкнено. Дозвольте NextCall у Системних налаштуваннях, щоб бачити зустрічі."
+          }
+        }
       }
     },
-    "NextCall" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "NextCall" } }
+    "Calendars": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календарі"
+          }
+        }
       }
     },
-    "No upcoming meetings" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Немає найближчих зустрічей" } }
+    "Days ahead: %lld": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Днів наперед: %lld"
+          }
+        }
       }
     },
-    "Notifications" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Сповіщення" } }
+    "Dimmed": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приглушені"
+          }
+        }
       }
     },
-    "Providers" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Сервіси" } }
+    "General": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Загальні"
+          }
+        }
       }
     },
-    "Quit NextCall" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Вийти з NextCall" } }
+    "Grant Calendar Access": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Надати доступ до календаря"
+          }
+        }
       }
     },
-    "Settings" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Налаштування" } }
+    "Hidden": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приховані"
+          }
+        }
       }
     },
-    "Settings…" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Налаштування…" } }
+    "Hide declined events": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ховати відхилені події"
+          }
+        }
       }
     },
-    "Shortcuts" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Скорочення" } }
+    "Join Next Meeting": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приєднатися до наступної зустрічі"
+          }
+        }
       }
     },
-    "This section is coming soon." : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Цей розділ незабаром з’явиться." } }
+    "NextCall": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NextCall"
+          }
+        }
       }
     },
-    "Version %@" : {
-      "localizations" : {
-        "uk" : { "stringUnit" : { "state" : "translated", "value" : "Версія %@" } }
+    "NextCall needs access to your calendar to show your meetings.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NextCall потрібен доступ до календаря, щоб показувати ваші зустрічі."
+          }
+        }
+      }
+    },
+    "No calendars found.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календарів не знайдено."
+          }
+        }
+      }
+    },
+    "No upcoming meetings": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Немає найближчих зустрічей"
+          }
+        }
+      }
+    },
+    "Notifications": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщення"
+          }
+        }
+      }
+    },
+    "Open System Settings": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити Системні налаштування"
+          }
+        }
+      }
+    },
+    "Past events": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Минулі події"
+          }
+        }
+      }
+    },
+    "Providers": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сервіси"
+          }
+        }
+      }
+    },
+    "Quit NextCall": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вийти з NextCall"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування"
+          }
+        }
+      }
+    },
+    "Settings…": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування…"
+          }
+        }
+      }
+    },
+    "Shortcuts": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скорочення"
+          }
+        }
+      }
+    },
+    "Show all-day events": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показувати події на весь день"
+          }
+        }
+      }
+    },
+    "This section is coming soon.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цей розділ незабаром з’явиться."
+          }
+        }
+      }
+    },
+    "Today": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сьогодні"
+          }
+        }
+      }
+    },
+    "Tomorrow": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завтра"
+          }
+        }
+      }
+    },
+    "Untitled event": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подія без назви"
+          }
+        }
+      }
+    },
+    "Version %@": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версія %@"
+          }
+        }
+      }
+    },
+    "%lld attendees": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld attendee"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld attendees"
+                }
+              }
+            }
+          }
+        },
+        "uk": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld учасник"
+                }
+              },
+              "few": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld учасники"
+                }
+              },
+              "many": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld учасників"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%lld учасника"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Other": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інші"
+          }
+        }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

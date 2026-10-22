@@ -10,6 +10,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItemController = StatusItemController(appState: appState) {
             SettingsOpener.open()
         }
+        appState.start()
         Log.app.info("NextCall launched")
     }
 }
