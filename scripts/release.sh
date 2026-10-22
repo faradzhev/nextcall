@@ -23,6 +23,8 @@
 #                  on this Mac without any credentials. Not distributable.
 #   --dry-run      Print the commands instead of running them.
 #   --skip-tests   Skip the unit-test and localization gates.
+#
+# Set SMOKE_TEST=1 to also launch the finished app for a few seconds (always done with --local).
 #   --help         Show this text.
 
 set -euo pipefail
@@ -118,6 +120,17 @@ fi
 log "Archiving (Release, universal)"
 run rm -rf "$BUILD_DIR"
 run mkdir -p "$BUILD_DIR" "$RELEASES_DIR"
+
+if [[ $LOCAL -eq 1 ]]; then
+  # An ad-hoc signed app has no Team ID, so under the hardened runtime it refuses to load its own embedded
+  # frameworks ("different Team IDs") and dies at launch. A Developer ID build shares one Team ID and needs
+  # no exception, so this relaxation exists only in --local packages.
+  LOCAL_ENTITLEMENTS="$PWD/$BUILD_DIR/NextCall-local.entitlements"
+  run cp App/NextCall.entitlements "$LOCAL_ENTITLEMENTS"
+  run /usr/libexec/PlistBuddy -c "Add :com.apple.security.cs.disable-library-validation bool true" "$LOCAL_ENTITLEMENTS"
+  SIGN_SETTINGS+=("CODE_SIGN_ENTITLEMENTS=$LOCAL_ENTITLEMENTS")
+fi
+
 run xcodebuild archive \
   -project NextCall.xcodeproj -scheme NextCall -configuration Release \
   -destination 'generic/platform=macOS' -archivePath "$ARCHIVE" \
@@ -159,6 +172,20 @@ if [[ $DRY_RUN -eq 0 ]]; then
   ENTITLEMENTS="$(codesign -d --entitlements :- "$APP" 2>/dev/null)"
   [[ "$ENTITLEMENTS" == *com.apple.security.app-sandbox* ]] || fail "app sandbox entitlement missing"
   echo "universal ($ARCHS), hardened runtime on, sandboxed"
+  if [[ $LOCAL -eq 1 || "${SMOKE_TEST:-0}" == 1 ]]; then
+    # Catches packaging mistakes that only show at launch (missing or unloadable frameworks).
+    # The app may show its welcome window for a few seconds.
+    log "Smoke test: launching the app"
+    "$APP/Contents/MacOS/NextCall" >/dev/null 2>&1 &
+    SMOKE_PID=$!
+    sleep 4
+    if kill -0 "$SMOKE_PID" 2>/dev/null; then
+      kill "$SMOKE_PID"; wait "$SMOKE_PID" 2>/dev/null || true
+      echo "launches and keeps running"
+    else
+      fail "the app exited right after launch; see ~/Library/Logs/DiagnosticReports"
+    fi
+  fi
   VERSION="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Contents/Info.plist")"
   BUILD="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP/Contents/Info.plist")"
 else
