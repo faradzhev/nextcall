@@ -11,6 +11,16 @@
         }
       }
     },
+    "Add keyword": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати ключове слово"
+          }
+        }
+      }
+    },
     "All day": {
       "localizations": {
         "uk": {
@@ -71,6 +81,36 @@
         }
       }
     },
+    "Events marked as Free": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Події зі статусом «Вільний»"
+          }
+        }
+      }
+    },
+    "Events with a meeting link are never ignored. A keyword matches whole words in the title.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Події з посиланням на зустріч ніколи не ігноруються. Ключове слово збігається з цілими словами в назві."
+          }
+        }
+      }
+    },
+    "Events without other attendees": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Події без інших учасників"
+          }
+        }
+      }
+    },
     "General": {
       "localizations": {
         "uk": {
@@ -107,6 +147,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ховати відхилені події"
+          }
+        }
+      }
+    },
+    "Ignored events": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ігноровані події"
           }
         }
       }
@@ -181,6 +231,16 @@
         }
       }
     },
+    "Other": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інші"
+          }
+        }
+      }
+    },
     "Past events": {
       "localizations": {
         "uk": {
@@ -207,6 +267,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вийти з NextCall"
+          }
+        }
+      }
+    },
+    "Remove %@": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Видалити «%@»"
+          }
+        }
+      }
+    },
+    "Reset keywords": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скинути ключові слова"
           }
         }
       }
@@ -247,6 +327,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Показувати події на весь день"
+          }
+        }
+      }
+    },
+    "Show ignored events as": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ігноровані події"
           }
         }
       }
@@ -349,16 +439,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "Other": {
-      "localizations": {
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Інші"
           }
         }
       }

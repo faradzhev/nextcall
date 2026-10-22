@@ -16,17 +16,20 @@ public actor CalendarService {
     private let calendar: Calendar
     private let changeSource: @Sendable () -> AsyncStream<ChangeReason>
     private let debounce: Duration
+    private let detector: MeetingLinkDetector
 
     public init(
         dataSource: any CalendarDataSource,
         changes: @escaping @Sendable () -> AsyncStream<ChangeReason>,
         debounce: Duration = .milliseconds(300),
+        detector: MeetingLinkDetector = .standard,
         calendar: Calendar = .autoupdatingCurrent,
         now: @escaping @Sendable () -> Date = { Date() }
     ) {
         self.dataSource = dataSource
         self.changeSource = changes
         self.debounce = debounce
+        self.detector = detector
         self.calendar = calendar
         self.now = now
     }
@@ -58,7 +61,7 @@ public actor CalendarService {
         )
         let meetings = events
             .filter { !$0.isCanceled }
-            .map { Meeting(raw: $0) }
+            .map { Meeting(raw: $0, link: detector.detect(url: $0.url, location: $0.location, notes: $0.notes)) }
             .sorted(by: Self.chronological)
         return CalendarSnapshot(authorization: authorization, calendars: calendars, meetings: meetings, fetchedAt: now())
     }

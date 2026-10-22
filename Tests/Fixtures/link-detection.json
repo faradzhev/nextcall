@@ -1,0 +1,1050 @@
+[
+  {
+    "id": "zoom-standard-invite",
+    "description": "Standard Zoom invite text with pwd, one-tap and local-number links",
+    "url": null,
+    "location": null,
+    "notes": "Tim Faradzev is inviting you to a scheduled Zoom meeting.\n\nTopic: Weekly sync\nTime: Oct 22, 2026 03:00 PM Kyiv\n\nJoin Zoom Meeting\nhttps://us02web.zoom.us/j/81234567890?pwd=Zk1vR2xHbWJ0dEw0eW5YQ3p3U2dTUT09\n\nMeeting ID: 812 3456 7890\nPasscode: 123456\n---\nOne tap mobile\n+13462487799,,81234567890#,,,,*123456# US (Houston)\n---\nDial by your location\n        +1 346 248 7799 US (Houston)\nMeeting ID: 812 3456 7890\nFind your local number: https://us02web.zoom.us/u/kdAbCdEfGh\n",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://us02web.zoom.us/j/81234567890?pwd=Zk1vR2xHbWJ0dEw0eW5YQ3p3U2dTUT09",
+      "native": "zoommtg://us02web.zoom.us/join?confno=81234567890&pwd=Zk1vR2xHbWJ0dEw0eW5YQ3p3U2dTUT09"
+    }
+  },
+  {
+    "id": "zoom-location-no-pwd",
+    "description": "Zoom link without password in location",
+    "url": null,
+    "location": "https://zoom.us/j/9876543210",
+    "notes": null,
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/9876543210",
+      "native": "zoommtg://zoom.us/join?confno=9876543210"
+    }
+  },
+  {
+    "id": "zoom-event-url-strips-tracking",
+    "description": "Zoom link in the URL field with tracking param",
+    "url": "https://acme.zoom.us/j/5551234567?pwd=abcDEF123&from=addon",
+    "location": null,
+    "notes": null,
+    "expect": {
+      "provider": "zoom",
+      "url": "https://acme.zoom.us/j/5551234567?pwd=abcDEF123",
+      "native": "zoommtg://acme.zoom.us/join?confno=5551234567&pwd=abcDEF123"
+    }
+  },
+  {
+    "id": "zoom-personal-room",
+    "description": "Personal meeting room has no confno, so no native URL",
+    "url": null,
+    "location": "https://zoom.us/my/tim.faradzev",
+    "notes": null,
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/my/tim.faradzev",
+      "native": null
+    }
+  },
+  {
+    "id": "zoom-webinar",
+    "description": "Webinar keeps the registrant token and has no native URL",
+    "url": null,
+    "location": null,
+    "notes": "Register in advance. Join webinar: https://zoom.us/w/91122334455?tk=Xy12AbCd",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/w/91122334455?tk=Xy12AbCd",
+      "native": null
+    }
+  },
+  {
+    "id": "zoom-schemeless",
+    "description": "Scheme-less zoom.us link in location",
+    "url": null,
+    "location": "zoom.us/j/12345678901",
+    "notes": null,
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/12345678901",
+      "native": "zoommtg://zoom.us/join?confno=12345678901"
+    }
+  },
+  {
+    "id": "zoom-html-anchor",
+    "description": "Zoom link in an HTML anchor",
+    "url": null,
+    "location": null,
+    "notes": "<p>Join Zoom Meeting</p><p><a href=\"https://company.zoom.us/j/7778889990?pwd=XyZ123\">https://company.zoom.us/j/7778889990?pwd=XyZ123</a></p>",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://company.zoom.us/j/7778889990?pwd=XyZ123",
+      "native": "zoommtg://company.zoom.us/join?confno=7778889990&pwd=XyZ123"
+    }
+  },
+  {
+    "id": "zoom-google-redirect",
+    "description": "Zoom link wrapped in a google.com/url redirect (Google Calendar export)",
+    "url": null,
+    "location": null,
+    "notes": "Join Zoom Meeting\nhttps://www.google.com/url?q=https://us06web.zoom.us/j/84455667788?pwd%3DabcXYZ789&sa=D&source=calendar&usd=2&usg=AOvVaw0Zs1\n",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://us06web.zoom.us/j/84455667788?pwd=abcXYZ789",
+      "native": "zoommtg://us06web.zoom.us/join?confno=84455667788&pwd=abcXYZ789"
+    }
+  },
+  {
+    "id": "zoom-trailing-comma",
+    "description": "Trailing punctuation is not part of the URL",
+    "url": null,
+    "location": null,
+    "notes": "Please join via https://zoom.us/j/3334445556?pwd=qwerty, see you there.",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/3334445556?pwd=qwerty",
+      "native": "zoommtg://zoom.us/join?confno=3334445556&pwd=qwerty"
+    }
+  },
+  {
+    "id": "zoom-gov",
+    "description": "ZoomGov domain",
+    "url": null,
+    "location": null,
+    "notes": "https://www.zoomgov.com/j/1601234567?pwd=govpass",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://www.zoomgov.com/j/1601234567?pwd=govpass",
+      "native": "zoommtg://www.zoomgov.com/join?confno=1601234567&pwd=govpass"
+    }
+  },
+  {
+    "id": "zoom-non-meeting-links",
+    "description": "Zoom download and support pages are not meetings",
+    "url": null,
+    "location": null,
+    "notes": "Need Zoom? Install it from https://zoom.us/download and see https://support.zoom.us/hc/en-us for help.",
+    "expect": null
+  },
+  {
+    "id": "zoom-web-client-join",
+    "description": "Web client join path",
+    "url": null,
+    "location": null,
+    "notes": "Join in browser: https://zoom.us/wc/join/81234567890",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/wc/join/81234567890",
+      "native": "zoommtg://zoom.us/join?confno=81234567890"
+    }
+  },
+  {
+    "id": "zoom-angle-brackets",
+    "description": "URL wrapped in angle brackets",
+    "url": null,
+    "location": null,
+    "notes": "Zoom <https://zoom.us/j/4443332221>",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/4443332221",
+      "native": "zoommtg://zoom.us/join?confno=4443332221"
+    }
+  },
+  {
+    "id": "zoom-http-scheme",
+    "description": "http scheme is upgraded to https",
+    "url": null,
+    "location": "http://zoom.us/j/1234500000",
+    "notes": null,
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/1234500000",
+      "native": "zoommtg://zoom.us/join?confno=1234500000"
+    }
+  },
+  {
+    "id": "zoom-ukrainian-text",
+    "description": "Ukrainian invite text around the link",
+    "url": null,
+    "location": null,
+    "notes": "Приєднуйтесь до наради Zoom: https://zoom.us/j/8887776665?pwd=ukr123 Ідентифікатор наради: 888 777 6665",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/8887776665?pwd=ukr123",
+      "native": "zoommtg://zoom.us/join?confno=8887776665&pwd=ukr123"
+    }
+  },
+  {
+    "id": "zoom-zero-width-and-nbsp",
+    "description": "NBSP before and zero-width space after the link",
+    "url": null,
+    "location": null,
+    "notes": "Link:&nbsp;https://zoom.us/j/7000000001​",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/7000000001",
+      "native": "zoommtg://zoom.us/join?confno=7000000001"
+    }
+  },
+  {
+    "id": "meet-location",
+    "description": "Meet link in location",
+    "url": null,
+    "location": "https://meet.google.com/abc-defg-hij",
+    "notes": null,
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-gcal-notes",
+    "description": "Google Calendar notes block",
+    "url": null,
+    "location": null,
+    "notes": "Join with Google Meet: https://meet.google.com/xyz-wxyz-abc\n\nLearn more about Meet at: https://support.google.com/a/users/answer/9282720\n\nPlease do not edit this section.",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/xyz-wxyz-abc",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-authuser-kept",
+    "description": "authuser is kept, tracking params dropped",
+    "url": null,
+    "location": "https://meet.google.com/abc-defg-hij?authuser=1&hs=224",
+    "notes": null,
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij?authuser=1",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-schemeless",
+    "description": "Scheme-less Meet link",
+    "url": null,
+    "location": "meet.google.com/qrs-tuvw-xyz",
+    "notes": null,
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/qrs-tuvw-xyz",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-lookup",
+    "description": "Meet lookup link",
+    "url": null,
+    "location": null,
+    "notes": "https://meet.google.com/lookup/abcd1234efgh",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/lookup/abcd1234efgh",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-landing-page",
+    "description": "Meet landing page is not a meeting",
+    "url": null,
+    "location": null,
+    "notes": "Start at https://meet.google.com/landing",
+    "expect": null
+  },
+  {
+    "id": "meet-html-invite",
+    "description": "Google Calendar HTML notes with phone PIN",
+    "url": null,
+    "location": null,
+    "notes": "<b>Join with Google Meet</b><br><a href=\"https://meet.google.com/aaa-bbbb-ccc\" target=\"_blank\">meet.google.com/aaa-bbbb-ccc</a><br>Or dial: ‪(US) +1 262-237-5251‬ PIN: ‪123 456 789‬#",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/aaa-bbbb-ccc",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-uppercase-host",
+    "description": "Host is case-insensitive",
+    "url": null,
+    "location": "HTTPS://MEET.GOOGLE.COM/abc-defg-hij",
+    "notes": null,
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-in-parentheses",
+    "description": "Closing parenthesis is not part of the URL",
+    "url": null,
+    "location": null,
+    "notes": "Video call (https://meet.google.com/ggg-hhhh-iii)",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/ggg-hhhh-iii",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-html-br-separated",
+    "description": "URL directly followed by <br>",
+    "url": null,
+    "location": null,
+    "notes": "Join:<br>https://meet.google.com/ddd-eeee-fff<br>Dial: +1 555 010 0000",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/ddd-eeee-fff",
+      "native": null
+    }
+  },
+  {
+    "id": "meet-ukrainian-text-no-space",
+    "description": "Cyrillic text glued before the scheme",
+    "url": null,
+    "location": null,
+    "notes": "Посилання на дзвінок: https://meet.google.com/jjj-kkkk-lll Приєднуйтесь вчасно",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/jjj-kkkk-lll",
+      "native": null
+    }
+  },
+  {
+    "id": "teams-plain-invite",
+    "description": "Outlook plain-text Teams invite with angle-bracket links and meetingOptions",
+    "url": null,
+    "location": null,
+    "notes": "________________________________________________________________________________\nMicrosoft Teams meeting\nJoin on your computer, mobile app or room device\nClick here to join the meeting <https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d>\nMeeting ID: 123 456 789 012\nPasscode: aBcDeF\nDownload Teams <https://www.microsoft.com/en-us/microsoft-teams/download-app> | Join on the web <https://aka.ms/JoinTeamsMeeting>\nLearn More <https://aka.ms/JoinTeamsMeeting> | Meeting options <https://teams.microsoft.com/meetingOptions/?organizerId=11112222-aaaa-3333-bbbb-444455556666&tenantId=aaaabbbb-0000-cccc-1111-dddd2222eeee&threadId=19_meeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi@thread.v2&messageId=0&language=en-US>\n________________________________________________________________________________",
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d",
+      "native": "msteams:/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d"
+    }
+  },
+  {
+    "id": "teams-html-invite",
+    "description": "Outlook HTML Teams invite with style block and anchors",
+    "url": null,
+    "location": null,
+    "notes": "<html><head><style>.x{color:red} a{text-decoration:none}</style></head><body><div class=\"me-email-text\"><div style=\"margin-bottom:16px\"><span><a href=\"https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d\" target=\"_blank\" rel=\"noreferrer noopener\">Click here to join the meeting</a></span></div><div>Meeting ID: <span>123 456 789 012</span><br>Passcode: <span>aBcDeF</span></div><div><a href=\"https://aka.ms/JoinTeamsMeeting\">Learn More</a> | <a href=\"https://teams.microsoft.com/meetingOptions/?organizerId=1&amp;tenantId=2\">Meeting options</a></div></div></body></html>",
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d",
+      "native": "msteams:/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d"
+    }
+  },
+  {
+    "id": "teams-safelinks-plain",
+    "description": "Teams link wrapped in Outlook SafeLinks",
+    "url": null,
+    "location": null,
+    "notes": "Click here to join the meeting <https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fteams.microsoft.com%2Fl%2Fmeetup-join%2F19%253ameeting_AbCdEf%2540thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522tid-123%2522%257d&data=05%7C01%7Cuser%40contoso.com%7Cabc123%7C0%7C0%7C638000000000000000%7CUnknown%7CTWFpbGZsb3d8%7C3000%7C%7C%7C&sdata=abcdef%2Bxyz%3D&reserved=0>\nMeeting ID: 987 654 321 098",
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_AbCdEf%40thread.v2/0?context=%7b%22Tid%22%3a%22tid-123%22%7d",
+      "native": "msteams:/l/meetup-join/19%3ameeting_AbCdEf%40thread.v2/0?context=%7b%22Tid%22%3a%22tid-123%22%7d"
+    }
+  },
+  {
+    "id": "teams-safelinks-html",
+    "description": "SafeLinks in an HTML href with &amp; entities (EU region host)",
+    "url": null,
+    "location": null,
+    "notes": "<a href=\"https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fteams.microsoft.com%2Fl%2Fmeetup-join%2F19%253ameeting_AbCdEf%2540thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522tid-123%2522%257d&amp;data=05%7C01%7Cuser%40contoso.com%7Cabc123%7C0%7C0%7C638000000000000000%7CUnknown%7CTWFpbGZsb3d8%7C3000%7C%7C%7C&amp;sdata=abcdef%2Bxyz%3D&amp;reserved=0\">Join the meeting now</a>",
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_AbCdEf%40thread.v2/0?context=%7b%22Tid%22%3a%22tid-123%22%7d",
+      "native": "msteams:/l/meetup-join/19%3ameeting_AbCdEf%40thread.v2/0?context=%7b%22Tid%22%3a%22tid-123%22%7d"
+    }
+  },
+  {
+    "id": "teams-live",
+    "description": "Teams free/personal meeting link",
+    "url": null,
+    "location": null,
+    "notes": "Join: https://teams.live.com/meet/9876543210123?p=AbCdEfGhIj",
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.live.com/meet/9876543210123?p=AbCdEfGhIj",
+      "native": null
+    }
+  },
+  {
+    "id": "teams-new-meet-link",
+    "description": "New short Teams meeting link has no native URL",
+    "url": null,
+    "location": "https://teams.microsoft.com/meet/3123456789012?p=AbCdEfGhIjKl",
+    "notes": null,
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.microsoft.com/meet/3123456789012?p=AbCdEfGhIjKl",
+      "native": null
+    }
+  },
+  {
+    "id": "teams-label-only",
+    "description": "Location says Teams but there is no link",
+    "url": null,
+    "location": "Microsoft Teams Meeting",
+    "notes": "Agenda to follow.",
+    "expect": null
+  },
+  {
+    "id": "teams-in-location",
+    "description": "Exchange puts the Teams link in location",
+    "url": null,
+    "location": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d",
+    "notes": null,
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d",
+      "native": "msteams:/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d"
+    }
+  },
+  {
+    "id": "teams-meeting-options-only",
+    "description": "Only the meetingOptions page",
+    "url": null,
+    "location": null,
+    "notes": "Meeting options https://teams.microsoft.com/meetingOptions/?organizerId=abc&tenantId=def",
+    "expect": null
+  },
+  {
+    "id": "teams-gov",
+    "description": "Teams government cloud",
+    "url": null,
+    "location": null,
+    "notes": "https://gov.teams.microsoft.us/l/meetup-join/19%3ameeting_GovAbC%40thread.v2/0?context=%7b%7d",
+    "expect": {
+      "provider": "teams",
+      "url": "https://gov.teams.microsoft.us/l/meetup-join/19%3ameeting_GovAbC%40thread.v2/0?context=%7b%7d",
+      "native": "msteams:/l/meetup-join/19%3ameeting_GovAbC%40thread.v2/0?context=%7b%7d"
+    }
+  },
+  {
+    "id": "teams-mention-of-zoom-first",
+    "description": "A bare 'zoom.us' mention before the Teams link must not win or block",
+    "url": null,
+    "location": null,
+    "notes": "We are not using zoom.us today.\nJoin: https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d",
+    "expect": {
+      "provider": "teams",
+      "url": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d",
+      "native": "msteams:/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d"
+    }
+  },
+  {
+    "id": "webex-personal-room",
+    "description": "Webex personal room",
+    "url": null,
+    "location": "https://acme.webex.com/meet/jdoe",
+    "notes": null,
+    "expect": {
+      "provider": "webex",
+      "url": "https://acme.webex.com/meet/jdoe",
+      "native": "webex://acme.webex.com/meet/jdoe"
+    }
+  },
+  {
+    "id": "webex-jphp-notes",
+    "description": "Classic Webex invite with j.php",
+    "url": null,
+    "location": null,
+    "notes": "Join meeting\nhttps://acme.webex.com/acme/j.php?MTID=m0123456789abcdef0123456789abcdef\nMeeting number (access code): 2551 234 5678\nMeeting password: AbCd\nJoin by phone\n+1-415-655-0001 US Toll",
+    "expect": {
+      "provider": "webex",
+      "url": "https://acme.webex.com/acme/j.php?MTID=m0123456789abcdef0123456789abcdef",
+      "native": "webex://acme.webex.com/acme/j.php?MTID=m0123456789abcdef0123456789abcdef"
+    }
+  },
+  {
+    "id": "webex-join-path",
+    "description": "Webex /join/ path",
+    "url": null,
+    "location": null,
+    "notes": "https://acme.webex.com/join/jdoe",
+    "expect": {
+      "provider": "webex",
+      "url": "https://acme.webex.com/join/jdoe",
+      "native": "webex://acme.webex.com/join/jdoe"
+    }
+  },
+  {
+    "id": "webex-joinservice",
+    "description": "Webex joinservice download link",
+    "url": null,
+    "location": null,
+    "notes": "https://acme.webex.com/wbxmjs/joinservice/sites/acme/meeting/download/abcdef0123456789?siteurl=acme&MTID=m123",
+    "expect": {
+      "provider": "webex",
+      "url": "https://acme.webex.com/wbxmjs/joinservice/sites/acme/meeting/download/abcdef0123456789?siteurl=acme&MTID=m123",
+      "native": "webex://acme.webex.com/wbxmjs/joinservice/sites/acme/meeting/download/abcdef0123456789?siteurl=acme&MTID=m123"
+    }
+  },
+  {
+    "id": "webex-marketing-page",
+    "description": "Webex marketing page is not a meeting",
+    "url": null,
+    "location": null,
+    "notes": "Get the app: https://www.webex.com/downloads.html",
+    "expect": null
+  },
+  {
+    "id": "slack-huddle",
+    "description": "Slack huddle link",
+    "url": null,
+    "location": null,
+    "notes": "Huddle: https://app.slack.com/huddle/T012ABCDE/C034FGHIJ",
+    "expect": {
+      "provider": "slackHuddle",
+      "url": "https://app.slack.com/huddle/T012ABCDE/C034FGHIJ",
+      "native": "slack://channel?team=T012ABCDE&id=C034FGHIJ"
+    }
+  },
+  {
+    "id": "slack-channel-not-huddle",
+    "description": "Plain Slack channel link",
+    "url": null,
+    "location": null,
+    "notes": "Thread: https://app.slack.com/client/T012ABCDE/C034FGHIJ",
+    "expect": null
+  },
+  {
+    "id": "facetime-fragment-kept",
+    "description": "FaceTime link depends on its fragment",
+    "url": null,
+    "location": null,
+    "notes": "FaceTime: https://facetime.apple.com/join#v=1&p=abcDEF123&k=xyz987_QWE-rty",
+    "expect": {
+      "provider": "faceTime",
+      "url": "https://facetime.apple.com/join#v=1&p=abcDEF123&k=xyz987_QWE-rty",
+      "native": null
+    }
+  },
+  {
+    "id": "jitsi-meet-jit-si",
+    "description": "Jitsi Meet public server",
+    "url": null,
+    "location": "https://meet.jit.si/WeeklyPlanning",
+    "notes": null,
+    "expect": {
+      "provider": "jitsi",
+      "url": "https://meet.jit.si/WeeklyPlanning",
+      "native": "jitsi-meet://meet.jit.si/WeeklyPlanning"
+    }
+  },
+  {
+    "id": "jitsi-8x8",
+    "description": "8x8 JaaS room",
+    "url": null,
+    "location": null,
+    "notes": "https://8x8.vc/vpaas-magic-cookie-1234abcd/DailyStandup",
+    "expect": {
+      "provider": "jitsi",
+      "url": "https://8x8.vc/vpaas-magic-cookie-1234abcd/DailyStandup",
+      "native": "jitsi-meet://8x8.vc/vpaas-magic-cookie-1234abcd/DailyStandup"
+    }
+  },
+  {
+    "id": "whereby-root",
+    "description": "Whereby room on the main domain",
+    "url": null,
+    "location": "https://whereby.com/acme-team",
+    "notes": null,
+    "expect": {
+      "provider": "whereby",
+      "url": "https://whereby.com/acme-team",
+      "native": null
+    }
+  },
+  {
+    "id": "whereby-subdomain",
+    "description": "Whereby room on a subdomain",
+    "url": null,
+    "location": "https://acme.whereby.com/standup",
+    "notes": null,
+    "expect": {
+      "provider": "whereby",
+      "url": "https://acme.whereby.com/standup",
+      "native": null
+    }
+  },
+  {
+    "id": "whereby-marketing",
+    "description": "Whereby marketing page is not a room",
+    "url": null,
+    "location": null,
+    "notes": "https://whereby.com/information",
+    "expect": null
+  },
+  {
+    "id": "goto-global",
+    "description": "GoToMeeting join link",
+    "url": null,
+    "location": null,
+    "notes": "Join: https://global.gotomeeting.com/join/123456789",
+    "expect": {
+      "provider": "goTo",
+      "url": "https://global.gotomeeting.com/join/123456789",
+      "native": null
+    }
+  },
+  {
+    "id": "goto-app",
+    "description": "GoTo app meeting link",
+    "url": null,
+    "location": "https://app.goto.com/meeting/123456789",
+    "notes": null,
+    "expect": {
+      "provider": "goTo",
+      "url": "https://app.goto.com/meeting/123456789",
+      "native": null
+    }
+  },
+  {
+    "id": "chime",
+    "description": "Amazon Chime PIN link",
+    "url": null,
+    "location": null,
+    "notes": "Join: https://chime.aws/1234567890",
+    "expect": {
+      "provider": "chime",
+      "url": "https://chime.aws/1234567890",
+      "native": null
+    }
+  },
+  {
+    "id": "ringcentral-v",
+    "description": "RingCentral short link",
+    "url": null,
+    "location": null,
+    "notes": "https://v.ringcentral.com/join/123456789",
+    "expect": {
+      "provider": "ringCentral",
+      "url": "https://v.ringcentral.com/join/123456789",
+      "native": null
+    }
+  },
+  {
+    "id": "ringcentral-meetings",
+    "description": "RingCentral meetings link",
+    "url": null,
+    "location": null,
+    "notes": "https://meetings.ringcentral.com/j/1234567890",
+    "expect": {
+      "provider": "ringCentral",
+      "url": "https://meetings.ringcentral.com/j/1234567890",
+      "native": null
+    }
+  },
+  {
+    "id": "bluejeans",
+    "description": "BlueJeans link keeps its query",
+    "url": null,
+    "location": null,
+    "notes": "https://bluejeans.com/123456789/4321?src=calendarLink",
+    "expect": {
+      "provider": "blueJeans",
+      "url": "https://bluejeans.com/123456789/4321?src=calendarLink",
+      "native": null
+    }
+  },
+  {
+    "id": "discord-channel",
+    "description": "Discord voice channel",
+    "url": null,
+    "location": null,
+    "notes": "Voice: https://discord.com/channels/123456789012345678/987654321098765432",
+    "expect": {
+      "provider": "discord",
+      "url": "https://discord.com/channels/123456789012345678/987654321098765432",
+      "native": "discord://-/channels/123456789012345678/987654321098765432"
+    }
+  },
+  {
+    "id": "discord-invite",
+    "description": "Discord invite link",
+    "url": null,
+    "location": null,
+    "notes": "https://discord.gg/AbCdEf",
+    "expect": {
+      "provider": "discord",
+      "url": "https://discord.gg/AbCdEf",
+      "native": "discord://-/invite/AbCdEf"
+    }
+  },
+  {
+    "id": "skype-join",
+    "description": "Skype join link",
+    "url": null,
+    "location": null,
+    "notes": "https://join.skype.com/AbCdEfGhIjKl",
+    "expect": {
+      "provider": "skype",
+      "url": "https://join.skype.com/AbCdEfGhIjKl",
+      "native": null
+    }
+  },
+  {
+    "id": "skype-for-business",
+    "description": "Skype for Business (Lync) meeting URL",
+    "url": null,
+    "location": null,
+    "notes": "Join Skype Meeting <https://meet.lync.com/contoso/jdoe/ABCD1234>",
+    "expect": {
+      "provider": "skype",
+      "url": "https://meet.lync.com/contoso/jdoe/ABCD1234",
+      "native": null
+    }
+  },
+  {
+    "id": "around",
+    "description": "Around room",
+    "url": null,
+    "location": "https://meet.around.co/r/design-crit",
+    "notes": null,
+    "expect": {
+      "provider": "around",
+      "url": "https://meet.around.co/r/design-crit",
+      "native": null
+    }
+  },
+  {
+    "id": "zoho-meeting",
+    "description": "Zoho Meeting join link",
+    "url": null,
+    "location": null,
+    "notes": "https://meeting.zoho.com/join?key=1234567890",
+    "expect": {
+      "provider": "zoho",
+      "url": "https://meeting.zoho.com/join?key=1234567890",
+      "native": null
+    }
+  },
+  {
+    "id": "livestorm",
+    "description": "Livestorm event",
+    "url": null,
+    "location": null,
+    "notes": "https://app.livestorm.co/acme/product-demo?type=detailed",
+    "expect": {
+      "provider": "livestorm",
+      "url": "https://app.livestorm.co/acme/product-demo?type=detailed",
+      "native": null
+    }
+  },
+  {
+    "id": "gather",
+    "description": "Gather space",
+    "url": null,
+    "location": "https://app.gather.town/app/aBcDeFgHiJ/acme-office",
+    "notes": null,
+    "expect": {
+      "provider": "gather",
+      "url": "https://app.gather.town/app/aBcDeFgHiJ/acme-office",
+      "native": null
+    }
+  },
+  {
+    "id": "pop-unverified-format",
+    "description": "Pop room (URL format assumed, not verified against real invites)",
+    "url": null,
+    "location": null,
+    "notes": "https://pop.com/j/ABCDEF",
+    "expect": {
+      "provider": "pop",
+      "url": "https://pop.com/j/ABCDEF",
+      "native": null
+    }
+  },
+  {
+    "id": "tuple-unverified-format",
+    "description": "Tuple room (URL format assumed, not verified against real invites)",
+    "url": null,
+    "location": null,
+    "notes": "https://tuple.app/c/abcdef",
+    "expect": {
+      "provider": "tuple",
+      "url": "https://tuple.app/c/abcdef",
+      "native": null
+    }
+  },
+  {
+    "id": "dialpad",
+    "description": "Dialpad Meetings room",
+    "url": null,
+    "location": null,
+    "notes": "https://meetings.dialpad.com/room/acme-standup",
+    "expect": {
+      "provider": "dialpad",
+      "url": "https://meetings.dialpad.com/room/acme-standup",
+      "native": null
+    }
+  },
+  {
+    "id": "multi-agenda-then-zoom",
+    "description": "Doc links around the meeting link",
+    "url": null,
+    "location": null,
+    "notes": "Agenda: https://docs.google.com/document/d/1AbC/edit\nJoin: https://zoom.us/j/1112223334?pwd=pw1\nSlides: https://docs.google.com/presentation/d/2XyZ/edit",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/1112223334?pwd=pw1",
+      "native": "zoommtg://zoom.us/join?confno=1112223334&pwd=pw1"
+    }
+  },
+  {
+    "id": "multi-url-field-wins",
+    "description": "url field beats location and notes",
+    "url": "https://zoom.us/j/2223334445",
+    "location": "https://meet.google.com/abc-defg-hij",
+    "notes": "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZjA0NzQ1ODktYzQ4Ny00ZTA4LWJhYzYtMTIzNDU2Nzg5MGFi%40thread.v2/0?context=%7b%22Tid%22%3a%22aaaabbbb-0000-cccc-1111-dddd2222eeee%22%2c%22Oid%22%3a%2211112222-aaaa-3333-bbbb-444455556666%22%7d",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/2223334445",
+      "native": "zoommtg://zoom.us/join?confno=2223334445"
+    }
+  },
+  {
+    "id": "multi-location-beats-notes",
+    "description": "location beats notes",
+    "url": null,
+    "location": "https://meet.google.com/abc-defg-hij",
+    "notes": "Backup: https://zoom.us/j/2223334445",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "multi-document-order-in-notes",
+    "description": "Two meeting links in notes: the first one wins",
+    "url": null,
+    "location": null,
+    "notes": "Primary: https://zoom.us/j/3334445551\nFallback: https://meet.google.com/abc-defg-hij",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/3334445551",
+      "native": "zoommtg://zoom.us/join?confno=3334445551"
+    }
+  },
+  {
+    "id": "multi-non-meeting-url-field",
+    "description": "A non-meeting URL field falls through to notes",
+    "url": "https://confluence.acme.com/display/TEAM/Planning",
+    "location": "Room 4B",
+    "notes": "Dial in: https://zoom.us/j/4445556661",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/4445556661",
+      "native": "zoommtg://zoom.us/join?confno=4445556661"
+    }
+  },
+  {
+    "id": "multi-html-anchor-order",
+    "description": "HTML: the first anchor in document order wins",
+    "url": null,
+    "location": null,
+    "notes": "<p>Primary <a href=\"https://meet.google.com/aaa-bbbb-ccc\">Meet</a></p><p>Backup https://zoom.us/j/5556667771</p>",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/aaa-bbbb-ccc",
+      "native": null
+    }
+  },
+  {
+    "id": "multi-redirect-then-direct",
+    "description": "Wrapped link first, direct link second",
+    "url": null,
+    "location": null,
+    "notes": "https://www.google.com/url?q=https://meet.google.com/abc-defg-hij&sa=D\nhttps://zoom.us/j/6667778881",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "none-all-empty",
+    "description": "No fields at all",
+    "url": null,
+    "location": null,
+    "notes": null,
+    "expect": null
+  },
+  {
+    "id": "none-room-only",
+    "description": "Physical room and plain notes",
+    "url": null,
+    "location": "Conference Room 3, Floor 2",
+    "notes": "Bring laptops. Coffee provided.",
+    "expect": null
+  },
+  {
+    "id": "none-docs-only",
+    "description": "Only document links",
+    "url": null,
+    "location": null,
+    "notes": "Spec: https://docs.google.com/document/d/1AbC/edit\nRepo: https://github.com/acme/app/pull/12",
+    "expect": null
+  },
+  {
+    "id": "none-phone-only",
+    "description": "Dial-in only",
+    "url": null,
+    "location": null,
+    "notes": "Dial +1 555 010 9999, PIN 1234#",
+    "expect": null
+  },
+  {
+    "id": "none-mimecast-wrapped",
+    "description": "Mimecast links carry no target URL, so they cannot be unwrapped (known limitation)",
+    "url": null,
+    "location": null,
+    "notes": "https://protect-us.mimecast.com/s/AbCdEfGhIj?domain=zoom.us",
+    "expect": null
+  },
+  {
+    "id": "none-zoom-lookalike",
+    "description": "Look-alike hosts must not match",
+    "url": null,
+    "location": null,
+    "notes": "https://zoom.us.evil.example/j/123456789 and https://notzoom.us/j/123456789",
+    "expect": null
+  },
+  {
+    "id": "none-teams-lookalike",
+    "description": "Teams look-alike host must not match",
+    "url": null,
+    "location": null,
+    "notes": "https://teams.microsoft.com.attacker.io/l/meetup-join/xyz",
+    "expect": null
+  },
+  {
+    "id": "proofpoint-v2-zoom",
+    "description": "Proofpoint URL Defense v2",
+    "url": null,
+    "location": null,
+    "notes": "https://urldefense.proofpoint.com/v2/url?u=https-3A__zoom.us_j_81234567890-3Fpwd-3DabC123&d=DwMFaQ&c=abc&r=xyz&m=123&s=sig&e=",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/81234567890?pwd=abC123",
+      "native": "zoommtg://zoom.us/join?confno=81234567890&pwd=abC123"
+    }
+  },
+  {
+    "id": "proofpoint-v3-zoom",
+    "description": "Proofpoint URL Defense v3",
+    "url": null,
+    "location": null,
+    "notes": "Join: https://urldefense.com/v3/__https://zoom.us/j/81234567890?pwd=abC123__;!!AbCdEf!XyZ$",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/81234567890?pwd=abC123",
+      "native": "zoommtg://zoom.us/join?confno=81234567890&pwd=abC123"
+    }
+  },
+  {
+    "id": "proofpoint-v1-meet",
+    "description": "Proofpoint URL Defense v1",
+    "url": null,
+    "location": null,
+    "notes": "https://urldefense.proofpoint.com/v1/url?u=https://meet.google.com/abc-defg-hij&k=abc%3D%3D%0A&r=xyz&m=123&s=sig",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "safelinks-zoom",
+    "description": "SafeLinks around a Zoom link",
+    "url": null,
+    "location": null,
+    "notes": "<https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fzoom.us%2Fj%2F8123456789%3Fpwd%3Dabc&data=05%7C01%7Cuser%40contoso.com%7Cabc123%7C0%7C0%7C638000000000000000%7CUnknown%7CTWFpbGZsb3d8%7C3000%7C%7C%7C&sdata=abcdef%2Bxyz%3D&reserved=0>",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/8123456789?pwd=abc",
+      "native": "zoommtg://zoom.us/join?confno=8123456789&pwd=abc"
+    }
+  },
+  {
+    "id": "google-redirect-meet",
+    "description": "google.com/url around a Meet link",
+    "url": null,
+    "location": null,
+    "notes": "https://www.google.com/url?q=https://meet.google.com/abc-defg-hij&sa=D&ust=1700000000&usg=AOvVaw1",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "nested-safelinks-google",
+    "description": "SafeLinks around a google.com/url redirect",
+    "url": null,
+    "location": null,
+    "notes": "https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.google.com%2Furl%3Fq%3Dhttps%3A%2F%2Fmeet.google.com%2Fabc-defg-hij%26sa%3DD&reserved=0",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "barracuda-zoom",
+    "description": "Barracuda Link Protect",
+    "url": null,
+    "location": null,
+    "notes": "https://linkprotect.cudasvc.com/url?a=https%3a%2f%2fzoom.us%2fj%2f5556667777&c=E,1,abc,&typo=1",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/5556667777",
+      "native": "zoommtg://zoom.us/join?confno=5556667777"
+    }
+  },
+  {
+    "id": "owa-redirect",
+    "description": "Outlook on the web redirect",
+    "url": null,
+    "location": null,
+    "notes": "https://outlook.office365.com/owa/redir.aspx?C=abc123&URL=https%3a%2f%2fmeet.google.com%2fabc-defg-hij&A=0",
+    "expect": {
+      "provider": "googleMeet",
+      "url": "https://meet.google.com/abc-defg-hij",
+      "native": null
+    }
+  },
+  {
+    "id": "html-entities-in-href",
+    "description": "&amp; in an href is decoded and tracking params dropped",
+    "url": null,
+    "location": null,
+    "notes": "<a href=\"https://zoom.us/j/1239874560?pwd=ab&amp;uname=Tim\">Join</a>",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://zoom.us/j/1239874560?pwd=ab",
+      "native": "zoommtg://zoom.us/join?confno=1239874560&pwd=ab"
+    }
+  },
+  {
+    "id": "html-rich-zoom-invite",
+    "description": "Rich HTML Zoom invite with tables and entities",
+    "url": null,
+    "location": null,
+    "notes": "<div dir=\"ltr\"><table><tr><td>Topic:</td><td>Weekly &amp; sync</td></tr></table><p>Join Zoom Meeting<br><a href=\"https://us02web.zoom.us/j/81234567890?pwd=Zk1vR2xHbWJ0dEw0eW5YQ3p3U2dTUT09\">https://us02web.zoom.us/j/81234567890?pwd=Zk1vR2xHbWJ0dEw0eW5YQ3p3U2dTUT09</a></p><p>Meeting ID: 812&nbsp;3456&nbsp;7890</p></div>",
+    "expect": {
+      "provider": "zoom",
+      "url": "https://us02web.zoom.us/j/81234567890?pwd=Zk1vR2xHbWJ0dEw0eW5YQ3p3U2dTUT09",
+      "native": "zoommtg://us02web.zoom.us/join?confno=81234567890&pwd=Zk1vR2xHbWJ0dEw0eW5YQ3p3U2dTUT09"
+    }
+  }
+]

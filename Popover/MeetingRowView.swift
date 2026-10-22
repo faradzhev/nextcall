@@ -4,6 +4,8 @@ import SwiftUI
 struct MeetingRowView: View {
     let meeting: Meeting
     let now: Date
+    /// A personal block (FR-16) shown dimmed instead of hidden.
+    var isIgnored = false
 
     /// Fixed so the popover can size its list without measuring.
     static let height: CGFloat = 36
@@ -35,7 +37,7 @@ struct MeetingRowView: View {
             }
         }
         .frame(height: Self.height)
-        .opacity(meeting.isPast(at: now) ? 0.5 : 1)
+        .opacity(meeting.isPast(at: now) || isIgnored ? 0.5 : 1)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
     }

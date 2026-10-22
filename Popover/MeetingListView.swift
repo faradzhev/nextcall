@@ -42,6 +42,7 @@ struct MeetingListView: View {
 }
 
 private struct DaySectionView: View {
+    @Environment(AppState.self) private var appState
     let section: DaySection
     let now: Date
 
@@ -56,7 +57,7 @@ private struct DaySectionView: View {
                 .accessibilityAddTraits(.isHeader)
 
             ForEach(section.meetings) { meeting in
-                MeetingRowView(meeting: meeting, now: now)
+                MeetingRowView(meeting: meeting, now: now, isIgnored: appState.isIgnored(meeting))
             }
         }
     }

@@ -3,7 +3,7 @@ import Foundation
 public enum Provider: String, CaseIterable, Hashable, Sendable {
     case zoom, googleMeet, teams, webex, slackHuddle, faceTime
     case jitsi, whereby, goTo, chime, ringCentral, blueJeans, discord, skype
-    case around, zoho, livestorm, gather, pop, tuple
+    case around, zoho, livestorm, gather, pop, tuple, dialpad
 }
 
 public struct MeetingLink: Hashable, Sendable {

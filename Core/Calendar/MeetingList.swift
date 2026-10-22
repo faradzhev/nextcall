@@ -5,15 +5,22 @@ public enum PastEventsMode: String, Codable, CaseIterable, Sendable {
     case dimmed
 }
 
+public enum IgnoredEventsMode: String, Codable, CaseIterable, Sendable {
+    case hidden
+    case dimmed
+}
+
 public struct MeetingListOptions: Equatable, Sendable {
     public var showAllDay: Bool
     public var hideDeclined: Bool
     public var pastEvents: PastEventsMode
+    public var ignoredEvents: IgnoredEventsMode
 
-    public init(showAllDay: Bool, hideDeclined: Bool, pastEvents: PastEventsMode) {
+    public init(showAllDay: Bool, hideDeclined: Bool, pastEvents: PastEventsMode, ignoredEvents: IgnoredEventsMode = .dimmed) {
         self.showAllDay = showAllDay
         self.hideDeclined = hideDeclined
         self.pastEvents = pastEvents
+        self.ignoredEvents = ignoredEvents
     }
 }
 
@@ -30,6 +37,7 @@ public enum MeetingList {
     public static func sections(
         _ meetings: [Meeting],
         options: MeetingListOptions,
+        filter: EventFilter? = nil,
         now: Date,
         calendar: Calendar
     ) -> [DaySection] {
@@ -39,6 +47,7 @@ public enum MeetingList {
             if meeting.isAllDay && !options.showAllDay { return false }
             if options.hideDeclined && meeting.myStatus == .declined { return false }
             if options.pastEvents == .hidden && meeting.isPast(at: now) { return false }
+            if options.ignoredEvents == .hidden, let filter, filter.isPersonal(meeting) { return false }
             return true
         }
 

@@ -12,6 +12,8 @@ final class AppState {
     private(set) var calendars: [CalendarRef] = []
     private(set) var meetings: [Meeting] = []
     private(set) var now = Date()
+    /// Rebuilt only when the rules change, because it compiles one pattern per ignore keyword.
+    private(set) var eventFilter: EventFilter
 
     /// Text shown next to the menu bar icon; `nil` means icon only.
     var menuBarTitle: String?
@@ -23,6 +25,7 @@ final class AppState {
     init(settings: SettingsStore, service: CalendarService) {
         self.settings = settings
         self.service = service
+        eventFilter = EventFilter(rules: settings.value.filterRules)
     }
 
     convenience init() {
@@ -34,7 +37,13 @@ final class AppState {
     }
 
     var sections: [DaySection] {
-        MeetingList.sections(meetings, options: settings.value.listOptions, now: now, calendar: .autoupdatingCurrent)
+        MeetingList.sections(
+            meetings,
+            options: settings.value.listOptions,
+            filter: eventFilter,
+            now: now,
+            calendar: .autoupdatingCurrent
+        )
     }
 
     var calendarGroups: [CalendarGroup] {
@@ -44,6 +53,9 @@ final class AppState {
     func start() {
         guard updatesTask == nil else { return }
         settings.onChange = { [weak self] old, new in
+            if old.filterRules != new.filterRules {
+                self?.eventFilter = EventFilter(rules: new.filterRules)
+            }
             guard old.daysAhead != new.daysAhead || old.disabledCalendarIDs != new.disabledCalendarIDs else { return }
             Task { await self?.refresh() }
         }
@@ -56,6 +68,10 @@ final class AppState {
                 await refresh()
             }
         }
+    }
+
+    func isIgnored(_ meeting: Meeting) -> Bool {
+        eventFilter.isPersonal(meeting)
     }
 
     func requestAccess() async {
