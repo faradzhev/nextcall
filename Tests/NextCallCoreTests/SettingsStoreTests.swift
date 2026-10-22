@@ -70,3 +70,47 @@ import Testing
         #expect(calls[0].1.showAllDay == true)
     }
 }
+
+@MainActor
+@Suite struct MenuBarSettingsTests {
+    private func makeDefaults() -> UserDefaults {
+        let suite = "NextCallTests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suite)!
+        defaults.removePersistentDomain(forName: suite)
+        return defaults
+    }
+
+    @Test func defaultsAreCountdownTwentyCharsAndAppMode() {
+        let settings = AppSettings()
+        #expect(settings.menuBarMode == .countdown)
+        #expect(settings.menuBarTitleLength == 20)
+        #expect(settings.providerOpenModes.isEmpty)
+        #expect(settings.browserBundleID == nil)
+    }
+
+    @Test func titleLengthIsClampedToItsRange() {
+        let store = SettingsStore(defaults: makeDefaults())
+        store.update { $0.menuBarTitleLength = 500 }
+        #expect(store.value.menuBarTitleLength == 40)
+        store.update { $0.menuBarTitleLength = 1 }
+        #expect(store.value.menuBarTitleLength == 5)
+    }
+
+    @Test func newFieldsSurviveARoundTripAndOldBlobsStillLoad() throws {
+        let defaults = makeDefaults()
+        SettingsStore(defaults: defaults).update {
+            $0.menuBarMode = .titleAndCountdown
+            $0.providerOpenModes = ["zoom": .browser]
+            $0.browserBundleID = "org.mozilla.firefox"
+        }
+        let reloaded = SettingsStore(defaults: defaults).value
+        #expect(reloaded.menuBarMode == .titleAndCountdown)
+        #expect(reloaded.providerOpenModes == ["zoom": .browser])
+        #expect(reloaded.browserBundleID == "org.mozilla.firefox")
+
+        defaults.set(Data(#"{"daysAhead": 3, "hideDeclined": false}"#.utf8), forKey: SettingsStore.key)
+        let old = SettingsStore(defaults: defaults).value
+        #expect(old.daysAhead == 3)
+        #expect(old.menuBarMode == .countdown)
+    }
+}

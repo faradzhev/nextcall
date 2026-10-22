@@ -25,14 +25,14 @@ public final class SettingsStore {
         } else {
             value = AppSettings()
         }
-        value.daysAhead = min(max(value.daysAhead, 1), CalendarService.maxDays)
+        Self.clamp(&value)
     }
 
     public func update(_ mutate: (inout AppSettings) -> Void) {
         let old = value
         var new = old
         mutate(&new)
-        new.daysAhead = min(max(new.daysAhead, 1), CalendarService.maxDays)
+        Self.clamp(&new)
         guard new != old else { return }
         value = new
         do {
@@ -41,5 +41,11 @@ public final class SettingsStore {
             Log.app.error("Could not save settings: \(error.localizedDescription, privacy: .public)")
         }
         onChange?(old, new)
+    }
+
+    private static func clamp(_ settings: inout AppSettings) {
+        settings.daysAhead = min(max(settings.daysAhead, 1), CalendarService.maxDays)
+        let range = AppSettings.titleLengthRange
+        settings.menuBarTitleLength = min(max(settings.menuBarTitleLength, range.lowerBound), range.upperBound)
     }
 }

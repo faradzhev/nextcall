@@ -1,6 +1,66 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%lld h": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld год"
+          }
+        }
+      }
+    },
+    "%lld h %lld min": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld год %lld хв"
+          }
+        }
+      }
+    },
+    "%lld min": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld хв"
+          }
+        }
+      }
+    },
+    "%lldh": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld год"
+          }
+        }
+      }
+    },
+    "%lldh %lldm": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld год %lld хв"
+          }
+        }
+      }
+    },
+    "%lldm": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld хв"
+          }
+        }
+      }
+    },
     "About": {
       "localizations": {
         "uk": {
@@ -27,6 +87,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Увесь день"
+          }
+        }
+      }
+    },
+    "Allow NextCall in System Settings › Login Items to finish enabling this.": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Щоб завершити, дозвольте NextCall у Системних налаштуваннях › Елементи входу."
           }
         }
       }
@@ -61,6 +131,16 @@
         }
       }
     },
+    "Countdown": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зворотний відлік"
+          }
+        }
+      }
+    },
     "Days ahead: %lld": {
       "localizations": {
         "uk": {
@@ -77,6 +157,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Приглушені"
+          }
+        }
+      }
+    },
+    "Elapsed time": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Минулий час"
           }
         }
       }
@@ -151,6 +241,16 @@
         }
       }
     },
+    "Icon only": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише іконка"
+          }
+        }
+      }
+    },
     "Ignored events": {
       "localizations": {
         "uk": {
@@ -161,12 +261,62 @@
         }
       }
     },
+    "Join": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приєднатися"
+          }
+        }
+      }
+    },
+    "Join %@": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приєднатися: %@"
+          }
+        }
+      }
+    },
     "Join Next Meeting": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Приєднатися до наступної зустрічі"
+          }
+        }
+      }
+    },
+    "Launch at login": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запускати під час входу"
+          }
+        }
+      }
+    },
+    "Menu bar": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рядок меню"
+          }
+        }
+      }
+    },
+    "Next: %@ in %@": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Далі: %@ за %@"
           }
         }
       }
@@ -211,12 +361,42 @@
         }
       }
     },
+    "Nothing coming up": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Найближчим часом нічого немає"
+          }
+        }
+      }
+    },
     "Notifications": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Сповіщення"
+          }
+        }
+      }
+    },
+    "Now: %@": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зараз: %@"
+          }
+        }
+      }
+    },
+    "Open Login Items": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити елементи входу"
           }
         }
       }
@@ -341,12 +521,42 @@
         }
       }
     },
+    "Show in menu bar": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показувати в рядку меню"
+          }
+        }
+      }
+    },
     "This section is coming soon.": {
       "localizations": {
         "uk": {
           "stringUnit": {
             "state": "translated",
             "value": "Цей розділ незабаром з’явиться."
+          }
+        }
+      }
+    },
+    "Title and countdown": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Назва і зворотний відлік"
+          }
+        }
+      }
+    },
+    "Title length: %lld": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довжина назви: %lld"
           }
         }
       }
@@ -387,6 +597,46 @@
           "stringUnit": {
             "state": "translated",
             "value": "Версія %@"
+          }
+        }
+      }
+    },
+    "in %lldh": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "за %lld год"
+          }
+        }
+      }
+    },
+    "in %lldh %lldm": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "за %lld год %lld хв"
+          }
+        }
+      }
+    },
+    "in %lldm": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "за %lld хв"
+          }
+        }
+      }
+    },
+    "now": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "зараз"
           }
         }
       }

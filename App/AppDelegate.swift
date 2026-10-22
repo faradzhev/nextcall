@@ -3,7 +3,12 @@ import NextCallCore
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    let appState = AppState()
+    let appState: AppState = {
+        #if DEBUG
+        if UITestSupport.isActive { return UITestSupport.makeAppState() }
+        #endif
+        return AppState()
+    }()
     private var statusItemController: StatusItemController?
     private lazy var settingsWindow = SettingsWindowController(appState: appState)
 

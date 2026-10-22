@@ -9,6 +9,40 @@ struct GeneralTab: View {
         let settings = appState.settings
         Form {
             Section {
+                Toggle("Launch at login", isOn: Binding(
+                    get: { appState.launchAtLogin.isOn },
+                    set: { appState.launchAtLogin.setEnabled($0) }
+                ))
+                if appState.launchAtLogin.status == .requiresApproval {
+                    HStack {
+                        Text("Allow NextCall in System Settings › Login Items to finish enabling this.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Button("Open Login Items") { appState.launchAtLogin.openSystemSettings() }
+                    }
+                }
+                if let error = appState.launchAtLogin.lastError {
+                    Text(error).font(.caption).foregroundStyle(.red)
+                }
+            }
+
+            Section("Menu bar") {
+                Picker("Show in menu bar", selection: settings.binding(\.menuBarMode)) {
+                    Text("Icon only").tag(MenuBarMode.iconOnly)
+                    Text("Countdown").tag(MenuBarMode.countdown)
+                    Text("Title and countdown").tag(MenuBarMode.titleAndCountdown)
+                }
+                Stepper(
+                    value: settings.binding(\.menuBarTitleLength),
+                    in: AppSettings.titleLengthRange
+                ) {
+                    Text("Title length: \(settings.value.menuBarTitleLength)")
+                }
+                .disabled(settings.value.menuBarMode != .titleAndCountdown)
+            }
+
+            Section {
                 Stepper(
                     value: settings.binding(\.daysAhead),
                     in: 1...CalendarService.maxDays
@@ -61,6 +95,7 @@ struct GeneralTab: View {
             }
         }
         .formStyle(.grouped)
+        .onAppear { appState.launchAtLogin.refresh() }
     }
 
     private func addKeyword() {

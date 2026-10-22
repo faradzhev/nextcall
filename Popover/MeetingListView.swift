@@ -3,8 +3,10 @@ import SwiftUI
 
 struct MeetingListView: View {
     @Environment(AppState.self) private var appState
+    @State private var selectedID: String?
+    @FocusState private var isFocused: Bool
 
-    private static let maxHeight: CGFloat = 440
+    private static let maxHeight: CGFloat = 400
     private static let padding: CGFloat = 12
     private static let sectionSpacing: CGFloat = 14
     private static let rowSpacing: CGFloat = 6
@@ -16,16 +18,48 @@ struct MeetingListView: View {
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, minHeight: 120)
         } else {
-            ScrollView {
-                VStack(alignment: .leading, spacing: Self.sectionSpacing) {
-                    ForEach(sections) { section in
-                        DaySectionView(section: section, now: appState.now)
+            let meetings = sections.flatMap(\.meetings)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: Self.sectionSpacing) {
+                        ForEach(sections) { section in
+                            DaySectionView(section: section, now: appState.now, selectedID: selectedID)
+                        }
                     }
+                    .padding(Self.padding)
                 }
-                .padding(Self.padding)
+                .focusable()
+                .focused($isFocused)
+                .focusEffectDisabled()
+                .onAppear { isFocused = true }
+                .onKeyPress(.downArrow) { move(1, in: meetings, proxy: proxy) }
+                .onKeyPress(.upArrow) { move(-1, in: meetings, proxy: proxy) }
+                .onKeyPress(.return) { joinSelected(in: meetings) }
+                .accessibilityIdentifier("popover.list")
             }
             .frame(height: min(Self.contentHeight(for: sections), Self.maxHeight))
         }
+    }
+
+    private func move(_ delta: Int, in meetings: [Meeting], proxy: ScrollViewProxy) -> KeyPress.Result {
+        guard !meetings.isEmpty else { return .ignored }
+        let current = meetings.firstIndex { $0.id == selectedID }
+        let next: Int
+        if let current {
+            next = min(max(current + delta, 0), meetings.count - 1)
+        } else {
+            // First arrow press: start from the next meeting (down) or the last one (up).
+            next = delta > 0 ? (meetings.firstIndex { !$0.isPast(at: appState.now) } ?? 0) : meetings.count - 1
+        }
+        selectedID = meetings[next].id
+        withAnimation { proxy.scrollTo(meetings[next].id, anchor: .center) }
+        return .handled
+    }
+
+    private func joinSelected(in meetings: [Meeting]) -> KeyPress.Result {
+        guard let meeting = meetings.first(where: { $0.id == selectedID }), meeting.link != nil else { return .ignored }
+        appState.join(meeting)
+        return .handled
     }
 
     /// Row and header heights are fixed, so the list height is computed instead of measured.
@@ -45,6 +79,7 @@ private struct DaySectionView: View {
     @Environment(AppState.self) private var appState
     let section: DaySection
     let now: Date
+    let selectedID: String?
 
     static let headerHeight: CGFloat = 18
 
@@ -57,7 +92,13 @@ private struct DaySectionView: View {
                 .accessibilityAddTraits(.isHeader)
 
             ForEach(section.meetings) { meeting in
-                MeetingRowView(meeting: meeting, now: now, isIgnored: appState.isIgnored(meeting))
+                MeetingRowView(
+                    meeting: meeting,
+                    now: now,
+                    isIgnored: appState.isIgnored(meeting),
+                    isSelected: meeting.id == selectedID
+                )
+                .id(meeting.id)
             }
         }
     }
