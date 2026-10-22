@@ -36,6 +36,6 @@ final class OnboardingWindowController: NSObject, NSWindowDelegate {
     }
 
     func windowWillClose(_ notification: Notification) {
-        UserDefaults.standard.set(true, forKey: OnboardingKey.completed)
+        OnboardingKey.store.set(true, forKey: OnboardingKey.completed)
     }
 }

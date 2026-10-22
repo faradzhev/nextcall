@@ -981,6 +981,16 @@
         }
       }
     },
+    "Show Welcome Screen": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати вітальний екран"
+          }
+        }
+      }
+    },
     "Show all": {
       "localizations": {
         "uk": {

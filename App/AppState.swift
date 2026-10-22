@@ -23,6 +23,8 @@ final class AppState {
 
     /// Set by the status item so joining can dismiss the popover.
     @ObservationIgnored var requestClosePopover: (@MainActor () -> Void)?
+    /// Set by the app delegate so Settings can reopen the welcome flow.
+    @ObservationIgnored var showOnboarding: (@MainActor () -> Void)?
 
     @ObservationIgnored private let service: CalendarService
     @ObservationIgnored private let launcher: MeetingLauncher

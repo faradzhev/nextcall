@@ -6,6 +6,8 @@ import NextCallCore
 /// Debug-only fixtures so UI tests can drive the real popover and status item without touching the
 /// user's calendar, default browser or login items. Active only with the `-uiTestFixtures` launch argument.
 enum UITestSupport {
+    /// Preferences used instead of the real ones, so a test run never touches the user's settings.
+    static let defaultsSuite = "com.frdzhv.NextCall.uitest"
     static let pasteboardName = NSPasteboard.Name("com.frdzhv.NextCall.uitest")
 
     static var isActive: Bool { ProcessInfo.processInfo.arguments.contains("-uiTestFixtures") }
@@ -15,7 +17,7 @@ enum UITestSupport {
 
     @MainActor
     static func makeAppState() -> AppState {
-        let suite = "com.frdzhv.NextCall.uitest"
+        let suite = defaultsSuite
         UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
         let settings = SettingsStore(defaults: UserDefaults(suiteName: suite)!)
         settings.update { $0.menuBarMode = .titleAndCountdown }

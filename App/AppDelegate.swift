@@ -23,9 +23,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItemController = StatusItemController(appState: appState) { [weak self] in
             self?.settingsWindow.show()
         }
+        appState.showOnboarding = { [weak self] in self?.onboardingWindow.show() }
         registerHotkeys()
         registerNotificationDelegate()
-        let onboardingDone = UserDefaults.standard.bool(forKey: OnboardingKey.completed)
+        let onboardingDone = OnboardingKey.store.bool(forKey: OnboardingKey.completed)
         // Until onboarding is done, the permission prompts belong to its second step.
         appState.start(requestAccessAutomatically: onboardingDone)
         if shouldShowOnboarding(done: onboardingDone) { onboardingWindow.show() }

@@ -4,12 +4,20 @@ import SwiftUI
 
 enum OnboardingKey {
     static let completed = "hasCompletedOnboarding"
+
+    /// Where the flag lives. UI tests use a throwaway suite so they never mark the user's real install as onboarded.
+    static var store: UserDefaults {
+        #if DEBUG
+        if UITestSupport.isActive, let suite = UserDefaults(suiteName: UITestSupport.defaultsSuite) { return suite }
+        #endif
+        return .standard
+    }
 }
 
 /// First-launch flow: welcome, permissions, then calendars and menu bar display.
 struct OnboardingView: View {
     @Environment(AppState.self) private var appState
-    @AppStorage(OnboardingKey.completed) private var completed = false
+    @AppStorage(OnboardingKey.completed, store: OnboardingKey.store) private var completed = false
     @State private var step = 0
     let onFinish: () -> Void
 

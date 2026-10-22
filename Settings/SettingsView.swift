@@ -58,6 +58,8 @@ private struct AboutTab: View {
                     .foregroundStyle(.secondary)
             }
 
+            Button("Show Welcome Screen") { appState.showOnboarding?() }
+
             Text("NextCall reads your calendar on this Mac only and has no accounts or analytics. The optional update check is its only network request.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
