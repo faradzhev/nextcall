@@ -14,7 +14,7 @@ private final class AlertPanel: NSPanel {
     }
 }
 
-/// Shows the full-screen "meeting starting" alert (FR-10): a card above everything, on every display
+/// Shows the full-screen "meeting starting" alert (FR-10): a card above everything (optionally over a dimmed screen), on every display
 /// and every Space, dismissed with Esc, a click, the global hotkey or after five minutes.
 @MainActor
 final class AlertPresenter {
@@ -25,15 +25,15 @@ final class AlertPresenter {
 
     var isShowing: Bool { !panels.isEmpty }
 
-    func show(_ meeting: Meeting, onJoin: @escaping @MainActor () -> Void) {
+    func show(_ meeting: Meeting, dimsBackground: Bool, onJoin: @escaping @MainActor () -> Void) {
         dismiss()
 
         let mouse = NSEvent.mouseLocation
         let primary = NSScreen.screens.first { NSMouseInRect(mouse, $0.frame, false) } ?? NSScreen.main
         for screen in NSScreen.screens {
-            let panel = makePanel(for: meeting, on: screen, onJoin: onJoin)
+            let panel = makePanel(for: meeting, on: screen, dimsBackground: dimsBackground, onJoin: onJoin)
             panels.append(panel)
-            panel.orderFrontRegardless()
+            fadeIn(panel)
             if screen == primary { panel.makeKey() }
         }
 
@@ -54,6 +54,20 @@ final class AlertPresenter {
         }
     }
 
+    /// Fades the panel in, or shows it at once when the user asked for reduced motion.
+    private func fadeIn(_ panel: NSPanel) {
+        guard !NSWorkspace.shared.accessibilityDisplayShouldReduceMotion else {
+            panel.orderFrontRegardless()
+            return
+        }
+        panel.alphaValue = 0
+        panel.orderFrontRegardless()
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.2
+            panel.animator().alphaValue = 1
+        }
+    }
+
     func dismiss() {
         dismissTask?.cancel()
         dismissTask = nil
@@ -61,9 +75,15 @@ final class AlertPresenter {
         panels.removeAll()
     }
 
-    private func makePanel(for meeting: Meeting, on screen: NSScreen, onJoin: @escaping @MainActor () -> Void) -> AlertPanel {
+    private func makePanel(
+        for meeting: Meeting,
+        on screen: NSScreen,
+        dimsBackground: Bool,
+        onJoin: @escaping @MainActor () -> Void
+    ) -> AlertPanel {
         let view = FullScreenAlertView(
             meeting: meeting,
+            dimsBackground: dimsBackground,
             onJoin: { [weak self] in
                 self?.dismiss()
                 onJoin()
@@ -71,7 +91,8 @@ final class AlertPresenter {
             onDismiss: { [weak self] in self?.dismiss() }
         )
         let hosting = NSHostingView(rootView: view)
-        let size = hosting.fittingSize
+        // With the scrim the panel covers the whole display (menu bar included); without it, just the card.
+        let size = dimsBackground ? screen.frame.size : hosting.fittingSize
 
         let panel = AlertPanel(
             contentRect: NSRect(origin: .zero, size: size),
@@ -92,10 +113,12 @@ final class AlertPresenter {
         panel.hasShadow = false
         panel.isReleasedWhenClosed = false
         panel.onCancel = { [weak self] in self?.dismiss() }
-        panel.setFrameOrigin(NSPoint(
+        panel.setFrame(NSRect(
             x: screen.frame.midX - size.width / 2,
-            y: screen.frame.midY - size.height / 2
-        ))
+            y: screen.frame.midY - size.height / 2,
+            width: size.width,
+            height: size.height
+        ), display: false)
         return panel
     }
 }

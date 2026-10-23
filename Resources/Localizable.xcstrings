@@ -351,6 +351,16 @@
         }
       }
     },
+    "Dim the screen behind the alert": {
+      "localizations": {
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Затемнювати екран за сповіщенням"
+          }
+        }
+      }
+    },
     "Dimmed": {
       "localizations": {
         "uk": {

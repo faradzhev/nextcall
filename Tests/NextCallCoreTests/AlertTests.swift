@@ -430,6 +430,7 @@ actor FakeNotificationCenter: NotificationCenterProtocol {
         #expect(s.notificationSound)
         #expect(!s.alertsOnlyWithLinks)
         #expect(!s.fullScreenAlertEnabled)
+        #expect(s.alertDimsScreen)
         #expect(s.hiddenMeetings.isEmpty)
         #expect(s.alertRules == AlertRules(enabled: true, leadMinutes: 1, sound: true, onlyWithLinks: false))
     }
@@ -447,16 +448,19 @@ actor FakeNotificationCenter: NotificationCenterProtocol {
         SettingsStore(defaults: defaults).update {
             $0.notificationLeadMinutes = 5
             $0.fullScreenAlertEnabled = true
+            $0.alertDimsScreen = false
             $0.hiddenMeetings = ["a|1": 100]
             $0.alertsOnlyWithLinks = true
         }
         let reloaded = SettingsStore(defaults: defaults).value
         #expect(reloaded.notificationLeadMinutes == 5)
         #expect(reloaded.fullScreenAlertEnabled)
+        #expect(!reloaded.alertDimsScreen)
         #expect(reloaded.hiddenMeetings == ["a|1": 100])
         #expect(reloaded.alertRules.onlyWithLinks)
 
         defaults.set(Data(#"{"daysAhead": 3}"#.utf8), forKey: SettingsStore.key)
         #expect(SettingsStore(defaults: defaults).value.notificationLeadMinutes == 1)
+        #expect(SettingsStore(defaults: defaults).value.alertDimsScreen, "old blobs get the dimmed default")
     }
 }

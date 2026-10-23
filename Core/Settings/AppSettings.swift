@@ -24,6 +24,8 @@ public struct AppSettings: Codable, Equatable, Sendable {
     /// Applies to notifications and the full-screen alert.
     public var alertsOnlyWithLinks: Bool
     public var fullScreenAlertEnabled: Bool
+    /// Darkens the whole screen behind the full-screen alert so attention goes to the card.
+    public var alertDimsScreen: Bool
     /// Meetings hidden from the context menu: meeting ID to its end time (reference-date seconds), so old entries can be pruned.
     public var hiddenMeetings: [String: Double]
 
@@ -46,6 +48,7 @@ public struct AppSettings: Codable, Equatable, Sendable {
         notificationSound: Bool = true,
         alertsOnlyWithLinks: Bool = false,
         fullScreenAlertEnabled: Bool = false,
+        alertDimsScreen: Bool = true,
         hiddenMeetings: [String: Double] = [:]
     ) {
         self.daysAhead = daysAhead
@@ -66,6 +69,7 @@ public struct AppSettings: Codable, Equatable, Sendable {
         self.notificationSound = notificationSound
         self.alertsOnlyWithLinks = alertsOnlyWithLinks
         self.fullScreenAlertEnabled = fullScreenAlertEnabled
+        self.alertDimsScreen = alertDimsScreen
         self.hiddenMeetings = hiddenMeetings
     }
 
@@ -90,6 +94,7 @@ public struct AppSettings: Codable, Equatable, Sendable {
         notificationSound = try c.decodeIfPresent(Bool.self, forKey: .notificationSound) ?? defaults.notificationSound
         alertsOnlyWithLinks = try c.decodeIfPresent(Bool.self, forKey: .alertsOnlyWithLinks) ?? defaults.alertsOnlyWithLinks
         fullScreenAlertEnabled = try c.decodeIfPresent(Bool.self, forKey: .fullScreenAlertEnabled) ?? defaults.fullScreenAlertEnabled
+        alertDimsScreen = try c.decodeIfPresent(Bool.self, forKey: .alertDimsScreen) ?? defaults.alertDimsScreen
         hiddenMeetings = try c.decodeIfPresent([String: Double].self, forKey: .hiddenMeetings) ?? defaults.hiddenMeetings
     }
 

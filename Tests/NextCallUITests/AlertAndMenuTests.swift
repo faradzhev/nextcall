@@ -42,6 +42,18 @@ final class AlertAndMenuTests: XCTestCase {
     }
 
     @MainActor
+    func testAlertDimsTheWholeScreen() throws {
+        let app = launch(["-uiTestShowAlert"])
+        XCTAssertTrue(app.buttons["alert.join"].waitForExistence(timeout: 10))
+        let screen = try XCTUnwrap(NSScreen.screens.first).frame
+        // The alert panel is exposed as a dialog. With the scrim it is as large as the display; the card alone is far smaller.
+        let panel = app.dialogs.firstMatch
+        XCTAssertTrue(panel.waitForExistence(timeout: 5))
+        XCTAssertGreaterThanOrEqual(panel.frame.width, screen.width - 1)
+        XCTAssertGreaterThanOrEqual(panel.frame.height, screen.height - 1)
+    }
+
+    @MainActor
     func testEscapeDismissesTheAlertWithoutJoining() {
         let app = launch(["-uiTestShowAlert"])
         let dismiss = app.buttons["alert.dismiss"]

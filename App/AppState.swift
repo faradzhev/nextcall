@@ -178,7 +178,7 @@ final class AppState {
     // MARK: Alerts and notifications
 
     func showFullScreenAlert(for meeting: Meeting) {
-        alertPresenter.show(meeting) { [weak self] in self?.join(meeting) }
+        alertPresenter.show(meeting, dimsBackground: settings.value.alertDimsScreen) { [weak self] in self?.join(meeting) }
     }
 
     func dismissFullScreenAlert() {

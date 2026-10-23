@@ -6,10 +6,24 @@ import SwiftUI
 struct FullScreenAlertView: View {
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     let meeting: Meeting
+    /// Fills the screen with a dark scrim behind the card.
+    var dimsBackground = false
     let onJoin: () -> Void
     let onDismiss: () -> Void
 
     var body: some View {
+        ZStack {
+            if dimsBackground {
+                // Swallows clicks too, so the meeting alert has the user's full attention.
+                Color.black.opacity(0.55)
+                    .accessibilityHidden(true)
+            }
+            card
+        }
+        .frame(maxWidth: dimsBackground ? .infinity : nil, maxHeight: dimsBackground ? .infinity : nil)
+    }
+
+    private var card: some View {
         VStack(spacing: 14) {
             Text("Meeting starting")
                 .font(.caption.weight(.semibold))

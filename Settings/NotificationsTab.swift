@@ -26,6 +26,8 @@ struct NotificationsTab: View {
 
             Section {
                 Toggle("Full-screen alert when a meeting starts", isOn: settings.binding(\.fullScreenAlertEnabled))
+                Toggle("Dim the screen behind the alert", isOn: settings.binding(\.alertDimsScreen))
+                    .disabled(!settings.value.fullScreenAlertEnabled)
                 Toggle("Only for events with a meeting link", isOn: settings.binding(\.alertsOnlyWithLinks))
             } footer: {
                 Text("Ignored events, declined events and all-day events never trigger a reminder or an alert.")

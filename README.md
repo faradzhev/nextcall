@@ -19,7 +19,7 @@ event, and opens it in the native app or your browser. No accounts, no servers, 
   `google.com/url` and Proofpoint redirects.
 - **Menu bar status**: icon only, a countdown ("in 12m") or title and countdown; accent-coloured in the last five
   minutes and "now" while a meeting runs.
-- **Reminders** with Join and Snooze buttons, and an optional **full-screen alert** at the start time.
+- **Reminders** with Join and Snooze buttons, and an optional **full-screen alert** at the start time that dims the screen behind it so you notice it.
 - **Smart filtering**: personal blocks (solo events, "Free" events, titles such as "Lunch" or "Focus") are
   dimmed or hidden and never trigger a reminder; an event with a meeting link always counts as a meeting.
 - **Per-provider open mode** (native app or browser) and a choice of browser.
