@@ -8,3 +8,7 @@ build/
 *.xcarchive
 *.dmg
 dist/
+
+# Private planning documents: kept on this Mac only, never committed
+docs/PRD.md
+docs/PLAN.md

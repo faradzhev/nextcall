@@ -102,7 +102,6 @@ Core/                  NextCallCore framework: all non-UI logic, runs headless i
 Resources/             Localizable.xcstrings (en, uk), InfoPlist.xcstrings, app icon
 Tests/                 Unit tests, 92 link-detection fixtures (Tests/Fixtures), UI tests
 scripts/               release.sh, check_localization.py
-docs/                  PRD.md (requirements) and PLAN.md (phases and decisions)
 ```
 
 Views never touch EventKit: they read `AppState`, which is fed by `CalendarService` (an actor over a
@@ -137,9 +136,9 @@ Bump `MARKETING_VERSION` and `CURRENT_PROJECT_VERSION` in `project.yml` for each
 
 ## Status
 
-All P0 and P1 requirements of [docs/PRD.md](docs/PRD.md) are implemented; see [docs/PLAN.md](docs/PLAN.md) for the
-phases, decisions and what is verified. Not in v1.0: the widget, Focus filter, multi-day view beyond seven days and
-a Mac App Store build (the code keeps Sparkle behind a `DIRECT_DISTRIBUTION` flag for that).
+Version 0.1.0: the feature set above is implemented and covered by unit and UI tests. Not yet included: a desktop
+widget, a Focus filter, a multi-day view beyond seven days and a Mac App Store build (the code keeps Sparkle behind a
+`DIRECT_DISTRIBUTION` flag for that).
 
 ## License
 

@@ -1,6 +1,6 @@
 # NextCall
 
-macOS menu bar app that shows upcoming meetings and joins calls in one click. Spec: `docs/PRD.md` (FR-xx IDs are the source of truth). Build plan and progress: `docs/PLAN.md`.
+macOS menu bar app that shows upcoming meetings and joins calls in one click. Spec: `docs/PRD.md` (FR-xx IDs are the source of truth). Build plan and progress: `docs/PLAN.md`. Both files are private: they are kept on the maintainer's Mac and listed in `.gitignore`, so they are not in the repository.
 
 ## Constraints (non-negotiable)
 - Swift 6, strict concurrency, warnings are errors. SwiftUI for UI; AppKit only where SwiftUI falls short.
