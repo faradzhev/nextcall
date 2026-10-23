@@ -224,6 +224,8 @@ run rm -rf "$STAGING"
 run mkdir -p "$STAGING"
 run ditto "$APP" "$STAGING/NextCall.app"
 run ln -s /Applications "$STAGING/Applications"
+# MIT and the bundled packages require their notices to travel with the binary.
+run cp LICENSE THIRD_PARTY_NOTICES.md "$STAGING/"
 run rm -f "$DMG"
 run hdiutil create -volname "NextCall" -srcfolder "$STAGING" -fs HFS+ -format UDZO -ov "$DMG"
 

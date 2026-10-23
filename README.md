@@ -25,6 +25,26 @@ event, and opens it in the native app or your browser. No accounts, no servers, 
 - **Per-provider open mode** (native app or browser) and a choice of browser.
 - English and Ukrainian, VoiceOver, full keyboard navigation, Reduce Motion / Transparency / Increase Contrast.
 
+## Download
+
+Get the latest `NextCall-<version>.dmg` from the **Releases** page of this repository, open it and drag NextCall
+to Applications. You do not need to clone anything.
+
+The download is not signed with an Apple Developer ID or notarized, so macOS blocks it the first time:
+
+1. Open NextCall once; macOS says it cannot verify the app.
+2. Open System Settings > Privacy & Security, scroll down and click **Open Anyway** next to NextCall, then confirm.
+
+Or, from Terminal, once after copying the app to Applications:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/NextCall.app
+```
+
+Check the download against its `.sha256` file with `shasum -a 256 -c NextCall-<version>.dmg.sha256` in the folder
+that holds both. This build does not update itself; download the next release to upgrade. If you would rather
+not run an unsigned app, build it from source (below).
+
 ## Requirements
 
 - macOS 14 Sonoma or later (Apple Silicon and Intel).
@@ -142,4 +162,5 @@ widget, a Focus filter, a multi-day view beyond seven days and a Mac App Store b
 
 ## License
 
-Not chosen yet.
+MIT, see [LICENSE](LICENSE). The bundled open source packages (KeyboardShortcuts, Sparkle) keep their own
+licenses, listed in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
