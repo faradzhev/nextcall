@@ -31,6 +31,7 @@ final class AppState {
     @ObservationIgnored private let notificationCenter: any NotificationCenterProtocol
     @ObservationIgnored private let alertPresenter = AlertPresenter()
     @ObservationIgnored private var alertTracker = FullScreenAlertTracker()
+    @ObservationIgnored private let presence = PresenceMonitor()
     @ObservationIgnored private var notifications: NotificationScheduler?
     @ObservationIgnored private var scheduler: MeetingScheduler?
     @ObservationIgnored private var updatesTask: Task<Void, Never>?
@@ -92,6 +93,12 @@ final class AppState {
         scheduler = MeetingScheduler { [weak self] snapshot in
             self?.handle(snapshot)
         }
+        presence.onChange = { [weak self] away in
+            // Back at the Mac: alert for what just started, without waiting for the next tick.
+            guard let self, !away else { return }
+            handle(MeetingTimeline.snapshot(meetings: visibleMeetings, filter: eventFilter, now: Date()))
+        }
+        presence.start()
         notifications = NotificationScheduler(center: notificationCenter) { meeting, lead in
             Self.notificationText(for: meeting, leadMinutes: lead)
         }
@@ -140,7 +147,8 @@ final class AppState {
         let due = alertTracker.due(
             snapshot: snapshot,
             filter: eventFilter,
-            onlyWithLinks: settings.value.alertsOnlyWithLinks
+            onlyWithLinks: settings.value.alertsOnlyWithLinks,
+            isAway: presence.isAway
         )
         // If several start together, show the one that starts last; the rest are in the popover.
         if let meeting = due.last { showFullScreenAlert(for: meeting) }
@@ -180,6 +188,8 @@ final class AppState {
     func showFullScreenAlert(for meeting: Meeting) {
         alertPresenter.show(meeting, dimsBackground: settings.value.alertDimsScreen) { [weak self] in self?.join(meeting) }
     }
+
+    var isShowingFullScreenAlert: Bool { alertPresenter.isShowing }
 
     func dismissFullScreenAlert() {
         alertPresenter.dismiss()
