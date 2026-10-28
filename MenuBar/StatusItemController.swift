@@ -64,18 +64,20 @@ final class StatusItemController: NSObject {
 
         let symbol = display.isImminent ? "video.fill" : "video.badge.checkmark"
         let label = String(localized: "NextCall")
-        button.image = NSImage(systemSymbolName: symbol, accessibilityDescription: label)
+        let image = NSImage(systemSymbolName: symbol, accessibilityDescription: label)
+        // A template image is drawn in the menu bar's own light or dark colour, whatever the wallpaper behind it.
+        image?.isTemplate = true
+        button.image = image
         button.imagePosition = text == nil ? .imageOnly : .imageLeft
 
         if let text {
-            let color: NSColor = display.isImminent ? .controlAccentColor : .labelColor
-            button.attributedTitle = NSAttributedString(
-                string: " " + text,
-                attributes: [
-                    .foregroundColor: color,
-                    .font: NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular),
-                ]
-            )
+            // No explicit colour unless imminent: a fixed .labelColor resolves against the app's appearance, not the
+            // menu bar's, and turns black on a dark bar. Left unset, the button draws the title in the bar's own colour.
+            var attributes: [NSAttributedString.Key: Any] = [
+                .font: NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .regular),
+            ]
+            if display.isImminent { attributes[.foregroundColor] = NSColor.controlAccentColor }
+            button.attributedTitle = NSAttributedString(string: " " + text, attributes: attributes)
         } else {
             button.title = ""
         }
