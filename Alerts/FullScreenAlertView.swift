@@ -14,8 +14,10 @@ struct FullScreenAlertView: View {
     var body: some View {
         ZStack {
             if dimsBackground {
-                // Swallows clicks too, so the meeting alert has the user's full attention.
+                // Swallows clicks, and a click on it dismisses the alert, so it can never trap the user.
                 Color.black.opacity(0.55)
+                    .contentShape(Rectangle())
+                    .onTapGesture(perform: onDismiss)
                     .accessibilityHidden(true)
             }
             card

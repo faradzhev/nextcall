@@ -36,6 +36,8 @@ final class AlertPresenter {
             fadeIn(panel)
             if screen == primary { panel.makeKey() }
         }
+        // The panel is non-activating; activating the app makes sure Esc reaches it.
+        NSApp.activate()
 
         // VoiceOver users cannot see the card appear, so say what is starting.
         NSAccessibility.post(
@@ -104,7 +106,8 @@ final class AlertPresenter {
         let label = String(localized: "Meeting starting: \(StatusText.displayTitle(meeting))")
         panel.title = label
         panel.setAccessibilityLabel(label)
-        panel.level = .screenSaver
+        // Above full-screen apps but below the lock screen and system dialogs, so it can never trap the user.
+        panel.level = .modalPanel
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary, .ignoresCycle]
         panel.isFloatingPanel = true
         panel.hidesOnDeactivate = false

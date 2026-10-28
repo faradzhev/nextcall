@@ -189,6 +189,8 @@ final class AppState {
         alertPresenter.show(meeting, dimsBackground: settings.value.alertDimsScreen) { [weak self] in self?.join(meeting) }
     }
 
+    var isShowingFullScreenAlert: Bool { alertPresenter.isShowing }
+
     func dismissFullScreenAlert() {
         alertPresenter.dismiss()
     }
