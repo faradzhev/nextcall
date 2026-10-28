@@ -122,6 +122,11 @@ final class StatusItemController: NSObject {
         join.target = self
         join.isEnabled = appState.timeline.joinTarget != nil
         menu.addItem(join)
+        if appState.isShowingFullScreenAlert {
+            let dismiss = NSMenuItem(title: String(localized: "Dismiss alert"), action: #selector(dismissAlert), keyEquivalent: "")
+            dismiss.target = self
+            menu.addItem(dismiss)
+        }
         menu.addItem(.separator())
 
         let settings = NSMenuItem(
@@ -147,6 +152,7 @@ final class StatusItemController: NSObject {
     }
 
     @objc private func joinNext() { appState.joinNext() }
+    @objc private func dismissAlert() { appState.dismissFullScreenAlert() }
     @objc private func openSettingsFromMenu() { openSettings() }
     @objc private func quitFromMenu() { NSApp.terminate(nil) }
 }
