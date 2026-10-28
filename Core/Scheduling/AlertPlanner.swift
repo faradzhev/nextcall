@@ -73,7 +73,15 @@ public struct FullScreenAlertTracker: Sendable {
 
     public init() {}
 
-    public mutating func due(snapshot: TimelineSnapshot, filter: EventFilter?, onlyWithLinks: Bool) -> [Meeting] {
+    /// While `isAway` (screen locked or asleep) nothing is due and nothing is marked shown, so on return only
+    /// meetings still inside the grace window are alerted and older ones are dropped instead of piling up.
+    public mutating func due(
+        snapshot: TimelineSnapshot,
+        filter: EventFilter?,
+        onlyWithLinks: Bool,
+        isAway: Bool = false
+    ) -> [Meeting] {
+        if isAway { return [] }
         let due = snapshot.ongoing.filter { meeting in
             snapshot.now.timeIntervalSince(meeting.start) <= Self.grace
                 && !shown.contains(meeting.id)

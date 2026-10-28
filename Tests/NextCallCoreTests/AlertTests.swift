@@ -131,6 +131,15 @@ private func meeting(
         #expect(tracker.due(snapshot: snapshot([m], at: makeDate(2026, 3, 10, 10, 3)), filter: filter, onlyWithLinks: false).isEmpty)
     }
 
+    @Test func nothingIsDueWhileAwayAndOldMeetingsAreDroppedOnReturn() {
+        var tracker = FullScreenAlertTracker()
+        let early = meeting("a", start: makeDate(2026, 3, 10, 10, 0))
+        let late = meeting("b", start: makeDate(2026, 3, 10, 10, 9))
+        let s = snapshot([early, late], at: makeDate(2026, 3, 10, 10, 10))
+        #expect(tracker.due(snapshot: s, filter: filter, onlyWithLinks: false, isAway: true).isEmpty)
+        #expect(tracker.due(snapshot: s, filter: filter, onlyWithLinks: false) == [late])
+    }
+
     @Test func respectsOnlyWithLinks() {
         var tracker = FullScreenAlertTracker()
         let m = meeting("a", title: "Review", start: makeDate(2026, 3, 10, 10, 0), withLink: false)
